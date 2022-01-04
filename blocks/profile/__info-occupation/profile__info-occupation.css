@@ -1,0 +1,13 @@
+.profile__info-occupation {
+    display: flex;
+    flex-direction: row;
+    color: #fff;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 21.78px;
+    margin: 0px;
+    padding: 0px;
+    padding-top: 9px;
+    padding-right: 44px;
+    box-sizing: border-box;
+}
