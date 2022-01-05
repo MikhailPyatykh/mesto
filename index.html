@@ -8,27 +8,70 @@
 </head>
 <body class="page">
     <header class="header">
-      <img class="logo logo__place_header" src="images/logo.svg"></img>
+      <img class="logo logo__place_header" src="./images/logo.svg"></img>
       <div class="header__line"></div>
     </header>
     <main class="content">
       <section class="profile">
-        <img class="profile__avatar" src="images/profileAvatars/image.jpg"></img>
-        <div class="profile__info">
+        <img class="profile__avatar" src="./images/profileAvatars/image.jpg"></img>
+        <form class="profile__info">
           <div class="profile__info-fio">Жак-Ив Кусто
             <div>
-              <div class="profile__info-button"></div>
+              <button type="button" class="profile__info-button"></button>
             </div>
           </div>
           <div class="profile__info-occupation">Исследователь океана</div>
-        </div>
-        <div class="profile__button">
-        </div>
+        </form>
+          <button type="button" class="profile__button"></button>
       </section>
-
+      <section class="places">
+        <ul class="places__list">
+          <li class="place">
+            <img src="./images/cards/karachaevsk.png"></img>
+            <div class="place__card-info">
+              <div class="place__title">Карачаево-Черкесия</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+          <li class="place">
+            <img src="./images/cards/elbrus.png"></img>
+            <div class="place__card-info">
+              <div class="place__title">Гора Эльбрус</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+          <li class="place">
+            <img src="./images/cards/dombai.png"></img>
+            <div class="place__card-info">
+              <div class="place__title">Домбай</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+          <li class="place">
+            <img src="./images/cards/aktash.jpg"></img>
+            <div class="place__card-info">
+              <div class="place__title">Акташ</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+          <li class="place">
+            <img src="./images/cards/elton.jpg"></img>
+            <div class="place__card-info">
+              <div class="place__title">Озеро Элтон</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+          <li class="place">
+            <img src="./images/cards/primorie.jpg"></img>
+            <div class="place__card-info">
+              <div class="place__title">Приморье</div>
+              <div class="place__icon-heart"></div>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
-   <footer class="footer">
-      
+   <footer class="footer">      
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
 </body>

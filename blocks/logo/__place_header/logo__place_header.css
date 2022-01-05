@@ -1,6 +1,7 @@
 .logo__place_header {
     max-width: 142px;
     margin-bottom: 41px;
+    cursor: pointer;
 }
 
 @media screen and (max-width: 880px) {

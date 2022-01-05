@@ -1,0 +1,8 @@
+.footer {
+    display: grid;
+    justify-content: start;
+    max-width: 880px;
+    margin: 0px;
+    padding: 0px;
+    width: 100%;
+}

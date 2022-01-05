@@ -1,6 +1,6 @@
 .profile__info-button {
     background: 10px 10px;
-    background-image: url(../../../images/pen-icon.svg);
+    background-image: url(../../../images/icon-pen.svg);
     background-repeat: no-repeat;
     background-position: center;
     width: 24px;
@@ -11,4 +11,5 @@
     margin-top: 16px;
     margin-left: 20px;
     box-sizing: border-box;
+    cursor: pointer;
 }

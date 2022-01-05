@@ -13,10 +13,14 @@
 @import url(../blocks/profile/__info-occupation/profile__info-occupation.css);
 @import url(../blocks/profile/__info-button/profile__info-button.css);
 @import url(../blocks/profile/__button/profile__button.css);
-
+@import url(../blocks/places/places.css);
+@import url(../blocks/places/__list/places__list.css);
+@import url(../blocks/place/place.css);
+@import url(../blocks/place/__card-info/place__card-info.css);
+@import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__icon-heart/place__icon-heart.css);
 
 
 
 @import url(../blocks/footer/footer.css);
-
 @import url(../blocks/footer/__copyright/footer__copyright.css);
