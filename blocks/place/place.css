@@ -9,3 +9,16 @@
     margin: 0px;
     padding: 0px;
 }
+
+@media screen and (max-width: 934px) {
+    .place {
+        max-width: 370px;
+    } 
+}
+
+@media screen and (max-width: 630px) {
+    .place {
+        max-width: 
+        550px;
+    } 
+}

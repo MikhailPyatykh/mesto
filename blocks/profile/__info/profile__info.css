@@ -1,11 +1,19 @@
 .profile__info {
     display: flex;
     flex-direction: column;
-    max-width: 580px;
     font-family: 'Inter', Arial, sans-serif;
     margin: 0px;
     padding: 0px;
     padding-left: 30px;
-    padding-top: 20px;
+    padding-right: 18px;
+    padding-top: 22px;
     box-sizing: border-box;
+}
+
+
+@media screen and (max-width: 880px) {
+    .profile__info {
+        padding: 0px;
+        padding-top: 26px;
+    }    
 }

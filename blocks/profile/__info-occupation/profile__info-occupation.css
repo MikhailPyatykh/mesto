@@ -1,6 +1,5 @@
 .profile__info-occupation {
     display: flex;
-    flex-direction: row;
     color: #fff;
     font-weight: 400;
     font-size: 18px;
@@ -10,4 +9,16 @@
     padding-top: 9px;
     padding-right: 44px;
     box-sizing: border-box;
+}
+
+@media screen and (max-width: 880px) {
+    .profile__info-occupation {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 16.94px;
+        padding: 0px;
+        padding-top: 8px;
+        flex-direction: column;
+        text-align: center;
+    }    
 }
