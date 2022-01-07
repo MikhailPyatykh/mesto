@@ -14,3 +14,12 @@
     width: 358px;
     height: 50px;
 }
+
+@media screen and (max-width: 540px) {
+    .popup__submit-btn {
+        width: 238px;
+        height: 46px;
+        font-size: 14px;
+        line-height: 16.94px;
+    }    
+}
