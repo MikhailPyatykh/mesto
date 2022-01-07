@@ -7,9 +7,8 @@
   <title>Mesto</title>
 </head>
 <body class="page">
-    <header class="header">
+    <header class="header header__line">
       <img class="logo logo__place_header" src="./images/logo.svg"></img>
-      <div class="header__line"></div>
     </header>
     <main class="content">
       <section class="profile">
@@ -82,8 +81,19 @@
         </ul>
       </section>
     </main>
-   <footer class="footer">      
+    <footer class="footer">      
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
+    <section class="popup">
+      <div class="popup__container">
+        <div class="popup__heading">Редактировать профиль</div>
+        <div class="input">
+          <input type="text" class="input__info-fio">
+          <input type="text" class="input__info-occupation">
+        </div>        
+        <button type="button" class="popup__submit-btn">Сохранить</button>
+      </div>
+      <button type="button" class="popup__close-btn"></button>
+    </section>
 </body>
 </html>

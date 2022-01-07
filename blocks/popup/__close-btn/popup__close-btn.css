@@ -1,0 +1,18 @@
+.popup__close-btn {
+    position: relative;
+    display: flex;
+    background: 32px 32px;
+    background-image: url(../../../images/close-button.svg);
+    background-repeat: no-repeat;
+    background-position: center;
+    width: 32px;
+    height: 32px;
+    padding: 0px;
+    margin: 0px;
+    cursor: pointer;
+    align-self: center;
+    box-sizing: border-box;
+    border: 0px;
+    top: -10px;
+    left: 237px;
+}

@@ -1,0 +1,10 @@
+.input {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-auto-flow: row;
+    gap: 30px;
+    margin: 0px;
+    padding: 0px;
+    padding-bottom: 48px;
+    box-sizing: border-box;
+}
