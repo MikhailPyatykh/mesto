@@ -21,6 +21,7 @@
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__title-text/place__title-text.css);
 @import url(../blocks/place/__icon-heart/place__icon-heart.css);
+@import url(../blocks/place/__icon-heart/_active/place__icon-heart_active.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

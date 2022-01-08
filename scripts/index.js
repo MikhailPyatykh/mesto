@@ -10,5 +10,3 @@ buttonEditProfile.addEventListener('click', function() {
 buttonCloseEditProfile.addEventListener('click', function() {
   popup.classList.remove(popupOpenedClass);
 });
-
-
