@@ -22,15 +22,14 @@ buttonCloseEditProfile.addEventListener('click', function() {
 
 function formSubmitHandler (evt) {
   evt.preventDefault();
-  let emptyString = '';
   nameInput.textContent = nameProfile.textContent;
   jobInput.textContent = jobProfile.textContent;
   nameProfile.textContent = nameInput.value;
   jobProfile.textContent = jobInput.value;
-  if (nameInput.value == emptyString) {
+  if (nameInput.value  === '') {
     nameProfile.textContent = nameInput.textContent;
   }
-  if (jobInput.value == emptyString) {
+  if (jobInput.value === '') {
     jobProfile.textContent = jobInput.textContent;
   }
   popup.classList.remove(popupOpenedClass);
