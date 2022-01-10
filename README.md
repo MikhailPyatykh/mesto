@@ -8,5 +8,5 @@
 Выполнил: Пятых Михаил
 
 Проект можно посмотреть по этой ссылке
-[Проект: "Путешествие по России"](https://mikhailpyatykh.github.io/mesto/index.html)
+[Проект: "Mesto"](https://mikhailpyatykh.github.io/mesto/index.html)
 
