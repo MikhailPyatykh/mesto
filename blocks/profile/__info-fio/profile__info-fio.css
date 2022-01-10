@@ -1,5 +1,5 @@
 .profile__info-fio {
-    display: flex;
+    max-width: 294px;
     flex-direction: row;
     color: #fff;
     font-weight: 500;
@@ -7,14 +7,18 @@
     line-height: 48px;
     margin: 0px;
     padding: 0px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
 }
 
 
 @media screen and (max-width: 880px) {
     .profile__info-fio {
-        font-weight: 500;
-        font-size: 27px;
-        line-height: 32.68px;
-        padding-left: 25px;
-    }    
+      max-width: 189px;
+      font-weight: 500;
+      font-size: 27px;
+      line-height: 32.68px;
+      text-align: center;
+    }
 }
