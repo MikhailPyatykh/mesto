@@ -14,10 +14,10 @@
 
 
 @media screen and (max-width: 540px) {
-    .input__info-occupation {
-        font-size: 14px;
-        line-height: 16.94px;
-        width: 238px;
-        height: 27px;
-    }
+  .input__info-occupation {
+    font-size: 14px;
+    line-height: 16.94px;
+    width: 238px;
+    height: 27px;
+  }
 }

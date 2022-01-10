@@ -11,8 +11,8 @@
 }
 
 @media screen and (max-width: 540px) {
-    .input {
-        padding-top: 75px;
-        padding-bottom: 45px;
-    }
+  .input {
+    padding-top: 75px;
+    padding-bottom: 45px;
+  }
 }

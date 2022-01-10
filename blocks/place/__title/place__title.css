@@ -1,5 +1,5 @@
 .place__title {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-auto-flow: row;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-flow: row;
 }

@@ -1,24 +1,24 @@
 .page {
-    -moz-osx-font-smoothing: grayscale;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
-    background-color: #000;
-    max-width: 1280px;
-    display: grid;
-    font-family: 'Inter', Arial, sans-serif;
-    font-weight: 400;
-    grid-template-rows: repeat(1, 1fr);
-    grid-auto-flow: row;
-    justify-items: center;
-    padding: 45px 0px 60px;
-    margin: 0px auto;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
+  -moz-text-size-adjust: 100%;
+  text-rendering: optimizeLegibility;
+  background-color: #000;
+  grid-template-rows: repeat(1, 1fr);
+  max-width: 1280px;
+  display: grid;
+  font-family: 'Inter', Arial, sans-serif;
+  font-weight: 400;
+  grid-auto-flow: row;
+  justify-items: center;
+  padding: 45px 0px 60px;
+  margin: 0px auto;
 }
 
 @media screen  and (max-width: 880px) {
-    .page {
+  .page {
     padding: 28px 0px 36px;
-    }
+  }
 }

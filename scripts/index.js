@@ -15,25 +15,25 @@ buttonEditProfile.addEventListener('click', function() {
 });
 
 buttonCloseEditProfile.addEventListener('click', function() {
-  popup.classList.remove(popupOpenedClass);
-  nameInput.value = nameProfile.textContent;
-  jobInput.value = jobProfile.textContent;
+    popup.classList.remove(popupOpenedClass);
+    nameInput.value = nameProfile.textContent;
+    jobInput.value = jobProfile.textContent;
 });
 
-function formSubmitHandler (evt) {
-  evt.preventDefault();
-  nameInput.textContent = nameProfile.textContent;
-  jobInput.textContent = jobProfile.textContent;
-  nameProfile.textContent = nameInput.value;
-  jobProfile.textContent = jobInput.value;
-  if (nameInput.value  === '') {
-    nameProfile.textContent = nameInput.textContent;
-  }
-  if (jobInput.value === '') {
-    jobProfile.textContent = jobInput.textContent;
-  }
-  popup.classList.remove(popupOpenedClass);
-  }
+function formSubmitHandler(evt) {
+    evt.preventDefault();
+    nameInput.textContent = nameProfile.textContent;
+    jobInput.textContent = jobProfile.textContent;
+    nameProfile.textContent = nameInput.value;
+    jobProfile.textContent = jobInput.value;
+    if (nameInput.value === '') {
+        nameProfile.textContent = nameInput.textContent;
+    }
+    if (jobInput.value === '') {
+        jobProfile.textContent = jobInput.textContent;
+    }
+    popup.classList.remove(popupOpenedClass);
+}
 
 
 formElement.addEventListener('submit', formSubmitHandler);
