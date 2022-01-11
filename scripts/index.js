@@ -5,8 +5,8 @@ const popupOpenedClass = 'popup_opened';
 let nameProfile = document.querySelector('.profile__info-fio');
 let jobProfile = document.querySelector('.profile__info-occupation');
 let formElement = document.querySelector('.popup__inputs');
-let nameInput = formElement.querySelector('.popup__inputs__fields_fio');
-let jobInput = formElement.querySelector('.popup__inputs__fields_occupation');
+let nameInput = formElement.querySelector('.popup__input_fio');
+let jobInput = formElement.querySelector('.popup__input_occupation');
 
 buttonEditProfile.addEventListener('click', function() {
     popup.classList.add(popupOpenedClass);
