@@ -1,6 +1,7 @@
 .place__icon-heart {
   display: grid;
   grid-template-columns: 22px;
+  border: none;
   background: 29px 19px;
   background-image: url(../../../images/icon-heart.svg);
   background-repeat: no-repeat;

@@ -21,6 +21,5 @@
 @media screen  and (max-width: 630px) {
   .places__list {
     grid-template-columns: 1fr;
-    justify-content: center;
   }
 }

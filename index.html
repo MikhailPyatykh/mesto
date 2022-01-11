@@ -7,17 +7,17 @@
   <title>Mesto</title>
 </head>
 <body class="page">
-    <header class="header header_line">
-      <div class="logo"></div>
+    <header class="header">
+      <div class="header__logo"></div>
     </header>
     <main class="content">
       <section class="profile">
         <img class="profile__avatar" src="./images/profileAvatars/image.jpg" alt="аватар профиля">
         <div class="profile__info">
-          <form>
-            <div class="profile__info-fio" id="name">Жак-Ив Кусто</div>
-            <div class="profile__info-occupation" id="job">Исследователь океана</div>
-          </form>
+          <div>
+            <h1 class="profile__info-fio" >Жак-Ив Кусто</h1>
+            <p class="profile__info-occupation">Исследователь океана</p>
+          </div>
           <button type="button" class="profile__edit-button"></button>
         </div>
         <button type="button" class="profile__add-button"></button>
@@ -25,56 +25,45 @@
       <section class="places">
         <ul class="places__list">
           <li class="place">
-            <img src="./images/cards/karachaevsk.png" class="place__image" alt="фото места">
+            <img src="./images/cards/karachaevsk.png" class="place__image" alt="Иллюстрация Шаонинский монастырь в республике Карачаево-Черкессии">
             <div class="place__card-info">
-              <div class="place__title">
-                <div class="place__title-text">Карачаево-Черкесия</div>
-              </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Карачаево-Черкесия</h2>
+              <button type="button" class="place__icon-heart"></div>
             </div>
           </li>
           <li class="place">
-            <img src="./images/cards/elbrus.png" class="place__image" alt="фото места">
+            <img src="./images/cards/elbrus.png" class="place__image" alt="Иллюстрация гора Эльбрус на Кавказе">
             <div class="place__card-info">
-              <div class="place__title">
-                <div class="place__title-text">Гора Эльбрус</div>
-              </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Гора Эльбрус</h2>
+              <button type="button" class="place__icon-heart"></button>
             </div>
           </li>
           <li class="place">
-            <img src="./images/cards/dombay.png" class="place__image" alt="фото места">
+            <img src="./images/cards/dombay.png" class="place__image" alt="Иллюстрация горный хребет Домбай в Карачаево-Черкесии">
             <div class="place__card-info">
-              <div class="place__title">
-                <div class="place__title-text">Домбай</div>
-              </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Домбай</h2>
+              <button type="button" class="place__icon-heart"></button>
             </div>
           </li>
           <li class="place">
-            <img src="./images/cards/aktash.png" class="place__image" alt="фото места">
+            <img src="./images/cards/aktash.png" class="place__image" alt="Иллюстрация горная долина близ села Акташ в Алтае">
             <div class="place__card-info">
-              <div class="place__title">
-                <div class="place__title-text">Акташ</div>
-              </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Акташ</h2>
+              <button type="button" class="place__icon-heart"></button>
             </div>
           </li>
           <li class="place">
-            <img src="./images/cards/elton.png" class="place__image" alt="фото места">
+            <img src="./images/cards/elton.png" class="place__image" alt="Иллюстрация розовое соленое озеро Эльтон в Волгоградской области">
             <div class="place__card-info">
-              <div class="place__title">
-                <div class="place__title-text">Озеро Элтон</div>
-              </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Озеро Эльтон</h2>
+              <button type="button" class="place__icon-heart"></button>
             </div>
           </li>
           <li class="place">
-            <img src="./images/cards/primorie.png" class="place__image" alt="фото места">
+            <img src="./images/cards/primorie.png" class="place__image" alt="Иллюстрация вид на склон морского берега в приморье близ города Владивосток">
             <div class="place__card-info">
-              <div class="place__title"><div class="place__title-text">Приморье</div>
-            </div>
-              <div class="place__icon-heart"></div>
+              <h2 class="place__title">Приморье</h2>
+              <button type="button" class="place__icon-heart"></button>
             </div>
           </li>
         </ul>
@@ -84,14 +73,14 @@
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
     <section class="popup">
-      <form class="popup__container">
+      <div class="popup__container">
         <div class="popup__heading">Редактировать профиль</div>
-        <div class="input">
-          <input type="text" class="input__info-fio">
-          <input type="text" class="input__info-occupation">
-        </div>
-        <button type="submit" class="popup__submit-btn">Сохранить</button>
-      </form>
+        <form class="popup__inputs">
+          <input type="text" class="popup__inputs__fields popup__inputs__fields_fio">
+          <input type="text" class="popup__inputs__fields popup__inputs__fields_occupation">
+          <button type="submit" class="popup__submit-btn">Сохранить</button>
+        </form>
+      </div>
       <button type="button" class="popup__close-btn"></button>
     </section>
     <script src="./scripts/index.js"></script>

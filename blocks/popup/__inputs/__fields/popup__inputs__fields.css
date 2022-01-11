@@ -1,4 +1,4 @@
-.input__info-occupation {
+.popup__inputs__fields {
   font-family: 'Inter', Arial, sans-serif;
   font-weight: 400;
   font-size: 14px;
@@ -10,12 +10,11 @@
   border: none;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
   cursor: pointer;
+  text-align: start;
 }
 
-
 @media screen and (max-width: 540px) {
-  .input__info-occupation {
-    font-size: 14px;
+  .popup__inputs__fields {
     line-height: 16.94px;
     width: 238px;
     height: 27px;
