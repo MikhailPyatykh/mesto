@@ -15,7 +15,7 @@
         <img class="profile__avatar" src="./images/profileAvatars/image.jpg" alt="аватар профиля">
         <div class="profile__info">
           <div>
-            <h1 class="profile__info-fio" >Жак-Ив Кусто</h1>
+            <h1 class="profile__info-fio">Жак-Ив Кусто</h1>
             <p class="profile__info-occupation">Исследователь океана</p>
           </div>
           <button type="button" class="profile__edit-button"></button>
@@ -23,66 +23,32 @@
         <button type="button" class="profile__add-button"></button>
       </section>
       <section class="places">
-        <ul class="places__list">
-          <li class="place">
-            <img src="./images/cards/karachaevsk.png" class="place__image" alt="Иллюстрация Шаонинский монастырь в республике Карачаево-Черкессии">
-            <div class="place__card-info">
-              <h2 class="place__title">Карачаево-Черкесия</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="./images/cards/elbrus.png" class="place__image" alt="Иллюстрация гора Эльбрус на Кавказе">
-            <div class="place__card-info">
-              <h2 class="place__title">Гора Эльбрус</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="./images/cards/dombay.png" class="place__image" alt="Иллюстрация горный хребет Домбай в Карачаево-Черкесии">
-            <div class="place__card-info">
-              <h2 class="place__title">Домбай</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="./images/cards/aktash.png" class="place__image" alt="Иллюстрация горная долина близ села Акташ в Алтае">
-            <div class="place__card-info">
-              <h2 class="place__title">Акташ</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="./images/cards/elton.png" class="place__image" alt="Иллюстрация розовое соленое озеро Эльтон в Волгоградской области">
-            <div class="place__card-info">
-              <h2 class="place__title">Озеро Эльтон</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-          <li class="place">
-            <img src="./images/cards/primorie.png" class="place__image" alt="Иллюстрация вид на склон морского берега в приморье близ города Владивосток">
-            <div class="place__card-info">
-              <h2 class="place__title">Приморье</h2>
-              <button type="button" class="place__icon-heart"></button>
-            </div>
-          </li>
-        </ul>
+        <ul class="places__list"></ul>
       </section>
     </main>
     <footer class="footer">
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
     <section class="popup">
-      <div class="popup__container">
-        <h3 class="popup__heading">Редактировать профиль</h3>
-        <form class="popup__inputs">
-          <input type="text" class="popup__input popup__input_type_fio">
-          <input type="text" class="popup__input popup__input_type_occupation">
-          <button type="submit" class="popup__submit-btn">Сохранить</button>
-        </form>
-      </div>
       <button type="button" class="popup__close-btn"></button>
     </section>
+    <template id="place-template">
+      <li class="place">
+        <img src="src" class="place__image">
+        <div class="place__icon-basket"></div>
+        <div class="place__card-info">
+          <h2 class="place__title"></h2>
+          <button type="button" class="place__icon-heart"></button>
+      </li>
+      <div class="popup__container">
+        <h3 class="popup__heading"></h3>
+        <form class="popup__inputs">
+          <input type="text" class="popup__input popup__input_type_fio popup__input_type_place">
+          <input type="text" class="popup__input popup__input_type_occupation popup__input_type_link">
+          <button type="submit" class="popup__submit-btn"></button>
+        </form>
+      </div>
+    </template>
     <script src="./scripts/index.js"></script>
 </body>
 </html>

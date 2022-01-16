@@ -17,6 +17,7 @@
 @import url(../blocks/place/__image/place__image.css);
 @import url(../blocks/place/__card-info/place__card-info.css);
 @import url(../blocks/place/__title/place__title.css);
+@import url(../blocks/place/__icon-basket/place__icon-basket.css);
 @import url(../blocks/place/__icon-heart/place__icon-heart.css);
 @import url(../blocks/place/__icon-heart/_active/place__icon-heart_active.css);
 @import url(../blocks/footer/footer.css);

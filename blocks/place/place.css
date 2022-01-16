@@ -1,6 +1,7 @@
 .place {
   background-color: #fff;
   display: grid;
+  position: relative;
   grid-template-columns: 1fr;
   grid-auto-flow: row;
   max-width: 282px;
