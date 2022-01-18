@@ -30,8 +30,9 @@
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
     <section class="popup">
-      <button type="button" class="popup__close-btn"></button>
+
     </section>
+    <section class="view"></section>
     <template id="place-template">
       <li class="place">
         <img src="src" class="place__image">
@@ -41,12 +42,22 @@
           <button type="button" class="place__icon-heart"></button>
       </li>
       <div class="popup__container">
-        <h3 class="popup__heading"></h3>
-        <form class="popup__inputs">
-          <input type="text" class="popup__input popup__input_type_fio popup__input_type_place">
-          <input type="text" class="popup__input popup__input_type_occupation popup__input_type_link">
-          <button type="submit" class="popup__submit-btn"></button>
-        </form>
+        <button type="button" class="popup__close-btn"></button>
+        <div class="popup__block">
+          <h3 class="popup__heading"></h3>
+          <form class="popup__inputs">
+            <input type="text" class="popup__input popup__input_type_fio popup__input_type_place">
+            <input type="text" class="popup__input popup__input_type_occupation popup__input_type_link">
+            <button type="submit" class="popup__submit-btn"></button>
+          </form>
+        </div>
+      </div>
+      <div class="view__container">
+        <button type="button" class="view__close-btn"></button>
+        <figure class="view__figure">
+          <img class="view__picture" src="src">
+          <figcaption class="view__caption"></figcaption>
+        </figure>
       </div>
     </template>
     <script src="./scripts/index.js"></script>

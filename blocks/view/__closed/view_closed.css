@@ -1,0 +1,27 @@
+@keyframes showOff {
+  0%{
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+.view_closed {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background: rgba(0, 0, 0, 0.9);
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: 0.5s;
+  animation: showOff 0.5s 1 ease-out;
+  animation-fill-mode: forwards;
+}

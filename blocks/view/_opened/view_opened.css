@@ -1,14 +1,14 @@
 @keyframes show {
-  0% {
-    opacity: 0;
+  0%{
+    opacity:0;
   }
 
   100% {
-    opacity: 1;
+  opacity: 1;
   }
 }
 
-.popup_opened {
+.view_opened {
   display: flex;
   opacity: 0;
   transition: 0.5s;

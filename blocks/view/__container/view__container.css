@@ -1,6 +1,6 @@
-.popup__container {
+.view__container {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-rows: 1fr;
   grid-auto-flow: row;
   box-sizing: border-box;
   justify-items: flex-end;
