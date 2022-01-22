@@ -1,4 +1,4 @@
-.view__caption {
+.popup__caption {
   display: grid;
   justify-self: start;
   grid-template-columns: max-content;

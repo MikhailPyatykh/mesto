@@ -1,7 +1,0 @@
-.view__container {
-  display: grid;
-  grid-template-rows: 1fr;
-  grid-auto-flow: row;
-  box-sizing: border-box;
-  justify-items: flex-end;
-}

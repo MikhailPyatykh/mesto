@@ -29,8 +29,41 @@
     <footer class="footer">
       <p class="footer__copyright">© 2022. Михаил Пятых</p>
     </footer>
-    <section class="popup"></section>
-    <section class="view"></section>
+    <section class="popup popup_edit_profile">
+      <div class="popup__container">
+        <button type="button" class="popup__close-btn"></button>
+        <div class="popup__block">
+          <h3 class="popup__heading">Редактировать профиль</h3>
+          <form class="popup__inputs">
+            <input type="text" class="popup__input popup__input_type_fio">
+            <input type="text" class="popup__input popup__input_type_occupation">
+            <button type="submit" class="popup__submit-btn">Сохранить</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="popup popup_add_place">
+      <div class="popup__container">
+        <button type="button" class="popup__close-btn"></button>
+        <div class="popup__block">
+          <h3 class="popup__heading">Новое место</h3>
+          <form class="popup__inputs">
+            <input type="text" placeholder="Название" class="popup__input popup__input_type_place">
+            <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
+            <button type="submit" class="popup__submit-btn">Создать</button>
+          </form>
+        </div>
+      </div>
+    </section>
+    <section class="popup popup_view">
+      <div class="popup__container">
+        <button type="button" class="popup__close-btn"></button>
+        <figure class="popup__figure">
+          <img class="popup__picture" src="">
+          <figcaption class="popup__caption"></figcaption>
+        </figure>
+      </div>
+    </section>
     <template id="place-template">
       <li class="place">
         <img src="src" class="place__image">
@@ -40,24 +73,6 @@
           <button type="button" class="place__icon-heart"></button>
         </div>
       </li>
-      <div class="popup__container">
-        <button type="button" class="popup__close-btn"></button>
-        <div class="popup__block">
-          <h3 class="popup__heading"></h3>
-          <form class="popup__inputs">
-            <input type="text" class="popup__input popup__input_type_fio popup__input_type_place">
-            <input type="text" class="popup__input popup__input_type_occupation popup__input_type_link">
-            <button type="submit" class="popup__submit-btn"></button>
-          </form>
-        </div>
-      </div>
-      <div class="view__container">
-        <button type="button" class="view__close-btn"></button>
-        <figure class="view__figure">
-          <img class="view__picture" src="src">
-          <figcaption class="view__caption"></figcaption>
-        </figure>
-      </div>
     </template>
     <script src="./scripts/index.js"></script>
 </body>
