@@ -6,6 +6,7 @@ const nameProfileInput = popupEditProfile.querySelector('.popup__input_type_fio'
 const jobProfileInput = popupEditProfile.querySelector('.popup__input_type_occupation');
 const nameProfile = document.querySelector('.profile__info-fio');
 const jobProfile = document.querySelector('.profile__info-occupation');
+const avatarProfile = document.querySelector('.profile__avatar');
 
 const buttonAddPlace = document.querySelector('.profile__add-button');
 const popupAddPlace = document.querySelector(".popup_add_place");
@@ -25,6 +26,8 @@ const placeTemplate = document.querySelector('#place-template').content.querySel
 const placesList = document.querySelector('.places__list');
 
 
+
+
 const openPopup = (popup) => {
     popup.classList.add(popupOpenedClass);
 }
@@ -42,6 +45,12 @@ const buttonCloseView = viewPopup.querySelector('.popup__close-btn');
 buttonCloseView.addEventListener('click', () => {
     closePopup(viewPopup);
 });
+
+const photoDescription = () => {
+  avatarProfile.setAttribute('alt', 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + jobProfile.textContent);
+}
+
+photoDescription();
 
 const createCard = (item) => {
     const place = placeTemplate.cloneNode(true);
