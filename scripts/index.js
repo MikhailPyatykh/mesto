@@ -135,7 +135,7 @@ buttonClosePopupAddPlace.addEventListener('click', () => {
     closePopup(popupAddPlace);
 });
 
-/*
+// Работает как надо
 const closePopupOnClick = (evt) => {
   if (evt.target === popupEditProfile){
     closePopup(popupEditProfile);
@@ -143,14 +143,15 @@ const closePopupOnClick = (evt) => {
 }
 
 popupEditProfile.addEventListener('click', closePopupOnClick);
-*/
 
+
+//  НЕ Работает
+/*
 const closePopupOnClick = (evt, popup) => {
     if (evt.target === popup){
         console.log('popup!');
         //closePopup(popup);
     }
 }
-
 popupEditProfile.addEventListener('click', () => {closePopupOnClick(popupEditProfile)});
-
+*/
