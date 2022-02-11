@@ -26,8 +26,6 @@ const placeTemplate = document.querySelector('#place-template').content.querySel
 const placesList = document.querySelector('.places__list');
 
 
-
-
 const openPopup = (popup) => {
     popup.classList.add(popupOpenedClass);
 }
@@ -91,32 +89,6 @@ const renderCard = (item, wrap, isAppend) => {
     }
 }
 
-const initialCards = [{
-        name: 'Карачаево-Черкесия',
-        link: './images/cards/karachaevsk.png'
-    },
-    {
-        name: 'Гора Эльбрус',
-        link: './images/cards/elbrus.png'
-    },
-    {
-        name: 'Домбай',
-        link: './images/cards/dombay.png'
-    },
-    {
-        name: 'Акташ',
-        link: './images/cards/aktash.png'
-    },
-    {
-        name: 'Озеро Эльтон',
-        link: './images/cards/elton.png'
-    },
-    {
-        name: 'Приморье',
-        link: './images/cards/primorie.png'
-    },
-];
-
 initialCards.forEach(item => {
     renderCard(item, placesList, true);
 });
@@ -125,6 +97,9 @@ buttonEditProfile.addEventListener('click', () => {
     openPopup(popupEditProfile);
     nameProfileInput.value = nameProfile.textContent;
     jobProfileInput.value = jobProfile.textContent;
+    setSubmitButtonState(editProfileInputs, formsValidationConfig);
+    handleField(editProfileInputs, editProfileInputs.nameInput, formsValidationConfig);
+    handleField(editProfileInputs, editProfileInputs.occupationInput, formsValidationConfig);
 });
 
 popupEditProfileInputs.addEventListener('submit', (evt) => {
@@ -142,6 +117,7 @@ buttonClosePopupEditProfile.addEventListener('click', () => {
 
 buttonAddPlace.addEventListener('click', () => {
     openPopup(popupAddPlace);
+    setSubmitButtonState(newPlaceInputs, formsValidationConfig);
 });
 
 popupAddPlaceInputs.addEventListener('submit', (evt) => {
@@ -152,10 +128,29 @@ popupAddPlaceInputs.addEventListener('submit', (evt) => {
     };
     closePopup(popupAddPlace);
     renderCard(cardInfo, placesList, false);
-    placeNameInput.value = "";
-    placeLinkInput.value = "";
+    popupAddPlaceInputs.reset();
 });
 
 buttonClosePopupAddPlace.addEventListener('click', () => {
     closePopup(popupAddPlace);
 });
+
+/*
+const closePopupOnClick = (evt) => {
+  if (evt.target === popupEditProfile){
+    closePopup(popupEditProfile);
+  }
+}
+
+popupEditProfile.addEventListener('click', closePopupOnClick);
+*/
+
+const closePopupOnClick = (evt, popup) => {
+    if (evt.target === popup){
+        console.log('popup!');
+        //closePopup(popup);
+    }
+}
+
+popupEditProfile.addEventListener('click', () => {closePopupOnClick(popupEditProfile)});
+

@@ -34,9 +34,25 @@
         <button type="button" class="popup__close-btn"></button>
         <div class="popup__block">
           <h3 class="popup__heading">Редактировать профиль</h3>
-          <form class="popup__inputs">
-            <input type="text" class="popup__input popup__input_type_fio">
-            <input type="text" class="popup__input popup__input_type_occupation">
+          <form class="popup__inputs" name="editProfileInputs" novalidate>
+            <input
+              required
+              name = "nameInput"
+              id = "name"
+              minlength="2" maxlength="40"
+              type="text"
+              class="popup__input popup__input_type_fio"
+            >
+            <span class="error" id = "name-error" name="editProfileInputsError"></span>
+            <input
+              required
+              name = "occupationInput"
+              id = "occupation"
+              minlength="2" maxlength="200"
+              type="text"
+              class="popup__input popup__input_type_occupation"
+            >
+            <span class="error" id = "occupation-error" name="occupationInputError"></span>
             <button type="submit" class="popup__submit-btn">Сохранить</button>
           </form>
         </div>
@@ -47,9 +63,26 @@
         <button type="button" class="popup__close-btn"></button>
         <div class="popup__block">
           <h3 class="popup__heading">Новое место</h3>
-          <form class="popup__inputs">
-            <input type="text" placeholder="Название" class="popup__input popup__input_type_place">
-            <input type="text" placeholder="Ссылка на картинку" class="popup__input popup__input_type_link">
+          <form class="popup__inputs" name="newPlaceInputs" novalidate>
+            <input
+              required
+              name = "newPlaceNameInput"
+              id = "newPlaceName"
+              minlength="2" maxlength="30"
+              type="text"
+              placeholder="Название"
+              class="popup__input popup__input_type_place"
+            >
+            <span class="error" id = "newPlaceName-error" name="newPlaceNameInputError"></span>
+            <input
+              required
+              name = "newPlaceLinkInput"
+              id = "newPlaceLink"
+              type="url"
+              placeholder="Ссылка на картинку"
+              class="popup__input popup__input_type_link"
+            >
+            <span class="error" id = "newPlaceLink-error" name="newPlaceLinkInputError"></span>
             <button type="submit" class="popup__submit-btn">Создать</button>
           </form>
         </div>
@@ -74,6 +107,8 @@
         </div>
       </li>
     </template>
+    <script src="./scripts/data.js"></script>
+    <script src="./scripts/validate.js"></script>
     <script src="./scripts/index.js"></script>
 </body>
 </html>
