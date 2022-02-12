@@ -1,3 +1,4 @@
+const popupsSelector = document.querySelectorAll('.popup');
 const buttonEditProfile = document.querySelector('.profile__edit-button');
 const popupEditProfile = document.querySelector(".popup_edit_profile");
 const popupEditProfileInputs = popupEditProfile.querySelector(".popup__inputs");
@@ -15,9 +16,10 @@ const buttonClosePopupAddPlace = popupAddPlace.querySelector(".popup__close-btn"
 const placeNameInput = document.querySelector('.popup__input_type_place');
 const placeLinkInput = document.querySelector('.popup__input_type_link');
 
-const viewPopup = document.querySelector(".popup_view");
-const viewPicture = viewPopup.querySelector('.popup__picture');
-const viewCaption = viewPopup.querySelector('.popup__caption');
+const popupView = document.querySelector(".popup_view");
+const buttonClosePopupView = popupView.querySelector(".popup__close-btn");
+const viewPicture = popupView.querySelector('.popup__picture');
+const viewCaption = popupView.querySelector('.popup__caption');
 
 const popupOpenedClass = 'popup_opened';
 const popupClosedClass = 'popup_closed';
@@ -25,30 +27,50 @@ const popupClosedClass = 'popup_closed';
 const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
 const placesList = document.querySelector('.places__list');
 
-
+// Открытие попапа
 const openPopup = (popup) => {
     popup.classList.add(popupOpenedClass);
+    document.addEventListener('keydown', escHandler);
 }
 
+// Таймер на закрытие попапа
 const closePopupTimer = (popup) => {
     popup.classList.remove(popupClosedClass, popupOpenedClass);
+    document.removeEventListener('keydown', escHandler);
 }
 
+// Закрытие попапа
 const closePopup = (popup) => {
     popup.classList.add(popupClosedClass);
     setTimeout(closePopupTimer, 500, (popup));
 }
 
-const buttonCloseView = viewPopup.querySelector('.popup__close-btn');
-buttonCloseView.addEventListener('click', () => {
-    closePopup(viewPopup);
-});
-
+// Добавление alt картинкам
 const photoDescription = () => {
-  avatarProfile.setAttribute('alt', 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + jobProfile.textContent);
+    avatarProfile.setAttribute('alt', 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + jobProfile.textContent);
 }
 
 photoDescription();
+
+// Закрытие попапа при событии
+const closePopupOnEvt = (evt, popup, button) => {
+    if (evt.target === popup || evt.target === button) {
+        closePopup(popup);
+    }
+}
+
+// Снятие обработчика
+const escHandler = (evt) => {
+    if (evt.key === 'Escape') {
+        const popupOpenedClass = document.querySelector('.popup_opened');
+        const popupOpened = popupOpenedClass.closest('.popup');
+        closePopup(popupOpened);
+    }
+}
+
+popupEditProfile.addEventListener('click', (evt) => closePopupOnEvt(evt, popupEditProfile, buttonClosePopupEditProfile));
+popupAddPlace.addEventListener('click', (evt) => closePopupOnEvt(evt, popupAddPlace, buttonClosePopupAddPlace));
+popupView.addEventListener('click', (evt) => closePopupOnEvt(evt, popupView, buttonClosePopupView));
 
 const createCard = (item) => {
     const place = placeTemplate.cloneNode(true);
@@ -69,7 +91,7 @@ const createCard = (item) => {
 
     const buttonOpenView = place.querySelector('.place__image');
     buttonOpenView.addEventListener('click', (evt) => {
-        openPopup(viewPopup);
+        openPopup(popupView);
         const parent = evt.target.closest('li');
         viewPicture.src = evt.currentTarget.src;
         viewCaption.textContent = parent.querySelector('.place__title').textContent;
@@ -93,6 +115,7 @@ initialCards.forEach(item => {
     renderCard(item, placesList, true);
 });
 
+
 buttonEditProfile.addEventListener('click', () => {
     openPopup(popupEditProfile);
     nameProfileInput.value = nameProfile.textContent;
@@ -102,16 +125,11 @@ buttonEditProfile.addEventListener('click', () => {
     handleField(editProfileInputs, editProfileInputs.occupationInput, formsValidationConfig);
 });
 
+
 popupEditProfileInputs.addEventListener('submit', (evt) => {
     evt.preventDefault();
     nameProfile.textContent = nameProfileInput.value;
     jobProfile.textContent = jobProfileInput.value;
-    closePopup(popupEditProfile);
-});
-
-buttonClosePopupEditProfile.addEventListener('click', () => {
-    nameProfileInput.value = nameProfile.textContent;
-    jobProfileInput.value = jobProfile.textContent;
     closePopup(popupEditProfile);
 });
 
@@ -130,28 +148,3 @@ popupAddPlaceInputs.addEventListener('submit', (evt) => {
     renderCard(cardInfo, placesList, false);
     popupAddPlaceInputs.reset();
 });
-
-buttonClosePopupAddPlace.addEventListener('click', () => {
-    closePopup(popupAddPlace);
-});
-
-// Работает как надо
-const closePopupOnClick = (evt) => {
-  if (evt.target === popupEditProfile){
-    closePopup(popupEditProfile);
-  }
-}
-
-popupEditProfile.addEventListener('click', closePopupOnClick);
-
-
-//  НЕ Работает
-/*
-const closePopupOnClick = (evt, popup) => {
-    if (evt.target === popup){
-        console.log('popup!');
-        //closePopup(popup);
-    }
-}
-popupEditProfile.addEventListener('click', () => {closePopupOnClick(popupEditProfile)});
-*/
