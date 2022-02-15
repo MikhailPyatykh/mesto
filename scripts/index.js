@@ -21,7 +21,6 @@ const viewPicture = popupView.querySelector('.popup__picture');
 const viewCaption = popupView.querySelector('.popup__caption');
 
 const popupOpenedClass = 'popup_opened';
-const popupClosedClass = 'popup_closed';
 
 const placeTemplate = document.querySelector('#place-template').content.querySelector('.place');
 const placesList = document.querySelector('.places__list');
@@ -32,16 +31,10 @@ const openPopup = (popup) => {
     document.addEventListener('keydown', escHandler);
 }
 
-// Таймер на закрытие попапа
-const closePopupTimer = (popup) => {
-    popup.classList.remove(popupClosedClass, popupOpenedClass);
-    document.removeEventListener('keydown', escHandler);
-}
-
 // Закрытие попапа
 const closePopup = (popup) => {
-    popup.classList.add(popupClosedClass);
-    setTimeout(closePopupTimer, 500, (popup));
+    popup.classList.remove(popupOpenedClass);
+    document.removeEventListener('keydown', escHandler);
 }
 
 // Добавление alt картинкам
