@@ -7,32 +7,36 @@ export class Card {
     this._template = document.querySelector(cardTemplateSelector).content.querySelector('.place');
   }
 
-  createCard() {
-    const place = this._template.cloneNode(true);
-    place.querySelector('.place__title').textContent = this._item.name;
-    place.querySelector('.place__image').src = this._item.link;
-    place.querySelector('.place__image').setAttribute('alt', 'Вид на ' + this._item.name);
-
-    const buttonLike = place.querySelector('.place__icon-heart');
-    buttonLike.addEventListener('click', evt => {
+  _setEventListeners() {
+    this._buttonLike = this._place.querySelector('.place__icon-heart');
+    this._buttonLike.addEventListener('click', evt => {
         evt.target.classList.toggle('place__icon-heart_active');
     });
 
-    const buttonDelete = place.querySelector('.place__icon-basket');
-    buttonDelete.addEventListener('click', () => {
-        const listItem = buttonDelete.closest('.place');
+    this._buttonDelete = this._place.querySelector('.place__icon-basket');
+    this._buttonDelete.addEventListener('click', () => {
+        const listItem = this._buttonDelete.closest('.place');
         listItem.remove();
     });
 
-    const buttonOpenView = place.querySelector('.place__image');
-    buttonOpenView.addEventListener('click', (evt) => {
+    this._buttonOpenView = this._place.querySelector('.place__image');
+    this._buttonOpenView.addEventListener('click', (evt) => {
         openPopup(popupView);
         viewPicture.src = evt.currentTarget.src;
         viewCaption.textContent = this._item.name;
         viewPicture.setAttribute('alt', 'Вид на ' + viewCaption.textContent);
     });
+  }
 
-    return place;
+  createCard() {
+    this._place = this._template.cloneNode(true);
+    this._place.querySelector('.place__title').textContent = this._item.name;
+    this._place.querySelector('.place__image').src = this._item.link;
+    this._place.querySelector('.place__image').setAttribute('alt', 'Вид на ' + this._item.name);
+
+    this._setEventListeners();
+
+    return this._place;
   }
 
 }
