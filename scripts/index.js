@@ -25,11 +25,16 @@ popupEditProfile.addEventListener('click', (evt) => closePopupOnEvt(evt, popupEd
 popupAddPlace.addEventListener('click', (evt) => closePopupOnEvt(evt, popupAddPlace, buttonClosePopupAddPlace));
 popupView.addEventListener('click', (evt) => closePopupOnEvt(evt, popupView, buttonClosePopupView));
 
-// Создание карточки из массива
-initialCards.forEach(item => {
+const renderCard = (item) => {
   // Используем класс Card
   const card = new Card (item, cardTemplateSelector);
-  placesList.append(card.createCard());
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
+// Создание карточки из массива
+initialCards.forEach(item => {
+  placesList.append(renderCard(item));
 });
 
 // Создание карточки пользователем
@@ -40,9 +45,7 @@ popupAddPlaceForm.addEventListener('submit', (evt) => {
         link: placeLinkInput.value,
     };
     closePopup(popupAddPlace);
-    // Используем класс Card
-    const card = new Card (cardInfo, cardTemplateSelector);
-    placesList.prepend(card.createCard());
+    placesList.prepend(renderCard(cardInfo));
     popupAddPlaceForm.reset();
 });
 
@@ -52,9 +55,7 @@ buttonEditProfile.addEventListener('click', () => {
     nameProfileInput.value = nameProfile.textContent;
     jobProfileInput.value = jobProfile.textContent;
     // Проверяем поля ввода и выставляем нужное значение кнопке Submit
-    editFormValidator.setSubmitButtonState();
-    editFormValidator.handleField(editProfileInputs.nameInput);
-    editFormValidator.handleField(editProfileInputs.occupationInput);
+    editFormValidator.resetValidation();
 });
 
 // Изменение пользователем имени и деятельности в профиле
@@ -69,5 +70,5 @@ popupEditProfileForm.addEventListener('submit', (evt) => {
 buttonAddPlace.addEventListener('click', () => {
     openPopup(popupAddPlace);
     // Выставляем нужное значение кнопке Submit
-    addCardFormValidator.setSubmitButtonState();
+    addCardFormValidator.resetValidation();
 });
