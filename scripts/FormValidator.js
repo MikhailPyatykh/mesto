@@ -34,13 +34,8 @@ export class FormValidator {
   }
 
   resetValidation() {
-    // this._toggleButtonState(); <== управляем кнопкой ==
 
     this._setSubmitButtonState();
-
-    // this._inputList.forEach((inputElement) => {
-    //   this._hideError(inputElement) <==очищаем ошибки ==
-    // });
 
     this._inputs.forEach((input) => {
       this._hideError(input);
