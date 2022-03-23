@@ -35,15 +35,15 @@ export class FormValidator {
 
   resetValidation() {
 
-    this._setSubmitButtonState();
+      this._setSubmitButtonState();
 
-    this._inputs.forEach((input) => {
-      this._hideError(input);
-    });
+      this._inputs.forEach((input) => {
+          this._hideError(input);
+      });
   }
 
   _handleSubmit(event) {
-    event.preventDefault();
+      event.preventDefault();
   }
 
   enableValidation() {

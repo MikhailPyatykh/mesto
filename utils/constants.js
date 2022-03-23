@@ -25,11 +25,11 @@ export const initialCards = [{
 ];
 
 export const formsValidationConfig = {
-  formSelector: '.popup__inputs',
-  inputSelector: '.popup__input',
-  inputErrorClass: 'popup__input_type_error',
-  submitButtonSelector: '.popup__submit-btn',
-  inactiveButtonClass: 'popup__submit-btn_disabled',
+formSelector: '.popup__inputs',
+inputSelector: '.popup__input',
+inputErrorClass: 'popup__input_type_error',
+submitButtonSelector: '.popup__submit-btn',
+inactiveButtonClass: 'popup__submit-btn_disabled',
 }
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
@@ -62,5 +62,3 @@ export const viewCaption = popupView.querySelector('.popup__caption');
 export const popupOpenedClass = 'popup_opened';
 
 export const cardTemplateSelector = '#place-template';
-
-
