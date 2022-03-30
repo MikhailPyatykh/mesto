@@ -1,10 +1,5 @@
-import {
-  viewPicture,
-  viewCaption
-} from '../utils/constants.js';
-
 export default class Card {
-  constructor(item, cardTemplateSelector) {
+  constructor(item, cardTemplateSelector, handleCardClick) {
       this._item = item
       this._template = document.querySelector(cardTemplateSelector).content.querySelector('.place');
       this._place = this._template.cloneNode(true);
@@ -12,8 +7,7 @@ export default class Card {
       this._cardTitle = this._place.querySelector('.place__title');
       this._buttonLike = this._place.querySelector('.place__icon-heart');
       this._buttonDelete = this._place.querySelector('.place__icon-basket');
-      this._popup = document.querySelector('.popup');
-      this._popupOpened = document.querySelector('.popup_opened');
+      this._handleCardClick = handleCardClick;
   }
 
   _setEventListeners() {
@@ -25,18 +19,16 @@ export default class Card {
           this._place.remove();
       });
 
-      this._cardImage.addEventListener('click', (evt) => {
-          // openPopup(popupView);
-          viewPicture.src = evt.currentTarget.src;
-          viewCaption.textContent = this._item.name;
-          viewPicture.setAttribute('alt', 'Вид на ' + this._item.name);
+      this._cardImage.addEventListener('click', () => {
+        this._handleCardClick(this._item.name, this._item.link);
       });
+
   }
 
   createCard() {
       this._cardTitle.textContent = this._item.name;
       this._cardImage.src = this._item.link;
-      this._cardImage.setAttribute('alt', 'Вид на ' + this._item.name);
+      this._cardImage.alt = 'Вид на ' + this._item.name;
 
       this._setEventListeners();
 

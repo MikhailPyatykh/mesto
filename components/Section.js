@@ -5,18 +5,16 @@ export default class Section {
     this._container = containerSelector;
   }
 
-  setItem(element, switcher) {
+  addItem(element, switcher) {
     if (switcher === true) {
       this._container.prepend(element);
     }
     else {
       this._container.append(element);
     }
-
   }
 
   renderItems() {
-
     this._renderedItems.forEach(item => {
       this._renderer(item);
     });

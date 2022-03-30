@@ -37,10 +37,16 @@ export const popupEditProfile = document.querySelector(".popup_edit_profile");
 export const popupEditProfileForm = popupEditProfile.querySelector(".popup__inputs");
 export const buttonClosePopupEditProfile = popupEditProfile.querySelector(".popup__close-btn");
 
-export const nameProfileInput = popupEditProfile.querySelector('.popup__input_type_fio');
-export const jobProfileInput = popupEditProfile.querySelector('.popup__input_type_occupation');
-export const nameProfile = document.querySelector('.profile__info-fio');
-export const jobProfile = document.querySelector('.profile__info-occupation');
+// export const nameProfileInput = popupEditProfile.querySelector('.popup__input_type_fio');
+// export const jobProfileInput = popupEditProfile.querySelector('.popup__input_type_occupation');
+// export const nameProfile = document.querySelector('.profile__info-fio');
+// export const jobProfile = document.querySelector('.profile__info-occupation');
+
+export const profileElements = {
+  nameProfile: document.querySelector('.profile__info-fio'),
+  occupationProfile: document.querySelector('.profile__info-occupation'),
+  }
+
 export const avatarProfile = document.querySelector('.profile__avatar');
 
 export const buttonAddPlace = document.querySelector('.profile__add-button');
@@ -56,8 +62,8 @@ export const buttonClosePopupView = popupView.querySelector(".popup__close-btn")
 
 export const placesList = document.querySelector('.places__list');
 
-export const viewPicture = popupView.querySelector('.popup__picture');
-export const viewCaption = popupView.querySelector('.popup__caption');
+export const popupPicture = popupView.querySelector('.popup__picture');
+export const popupCaption = popupView.querySelector('.popup__caption');
 
 export const popupOpenedClass = 'popup_opened';
 
