@@ -1,0 +1,23 @@
+{
+  "name": "yandex_praktikum",
+  "version": "0.0.1",
+  "description": "В проекте тренируются навыки:\r * Понимания базовых принципов ООП\r * Применения ООП в интерфейсах\r * Использование модулей в JS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/MikhailPyatykh/mesto.git"
+  },
+  "author": "Mikhail Pyatykh",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/MikhailPyatykh/mesto/issues"
+  },
+  "homepage": "https://github.com/MikhailPyatykh/mesto#readme",
+  "devDependencies": {
+    "webpack": "^5.71.0",
+    "webpack-cli": "^4.9.2"
+  }
+}
