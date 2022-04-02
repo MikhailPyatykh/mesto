@@ -1,57 +1,3 @@
-
-// // Слушатели попапов на события
-// popupEditProfile.addEventListener('click', (evt) => closePopupOnEvt(evt, popupEditProfile, buttonClosePopupEditProfile));
-// popupAddPlace.addEventListener('click', (evt) => closePopupOnEvt(evt, popupAddPlace, buttonClosePopupAddPlace));
-// popupView.addEventListener('click', (evt) => closePopupOnEvt(evt, popupView, buttonClosePopupView));
-
-// const renderCard = (item) => {
-//   // Используем класс Card
-//   const card = new Card(item, cardTemplateSelector);
-//   const cardElement = card.createCard();
-//   return cardElement;
-// }
-
-// // Создание карточки из массива
-// initialCards.forEach(item => {
-//   placesList.append(renderCard(item));
-// });
-
-// // Создание карточки пользователем
-// popupAddPlaceForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   const cardInfo = {
-//       name: placeNameInput.value,
-//       link: placeLinkInput.value,
-//   };
-//   closePopup(popupAddPlace);
-//   placesList.prepend(renderCard(cardInfo));
-//   popupAddPlaceForm.reset();
-// });
-
-// // Открытие пользователем формы имени и деятельности в профиле
-// buttonEditProfile.addEventListener('click', () => {
-//   openPopup(popupEditProfile);
-//   nameProfileInput.value = nameProfile.textContent;
-//   jobProfileInput.value = jobProfile.textContent;
-//   // Проверяем поля ввода и выставляем нужное значение кнопке Submit
-//   editFormValidator.resetValidation();
-// });
-
-// // Изменение пользователем имени и деятельности в профиле
-// popupEditProfileForm.addEventListener('submit', (evt) => {
-//   evt.preventDefault();
-//   nameProfile.textContent = nameProfileInput.value;
-//   jobProfile.textContent = jobProfileInput.value;
-//   closePopup(popupEditProfile);
-// });
-
-// // Добавление пользователем карточки нового места
-// buttonAddPlace.addEventListener('click', () => {
-//   openPopup(popupAddPlace);
-//   // Выставляем нужное значение кнопке Submit
-//   addCardFormValidator.resetValidation();
-// });
-
 import {
   initialCards,
   placesList,
@@ -61,9 +7,13 @@ import {
   buttonEditProfile,
   buttonAddPlace,
   formsValidationConfig,
-  profileElements,
   popupView,
-  avatarProfile
+  avatarProfile,
+  elementsSelectors,
+  nameProfile,
+  occupationProfile,
+  nameProfileInput,
+  occupationProfileInput
 } from '../utils/constants.js';
 
 import {
@@ -83,7 +33,7 @@ import UserInfo from '../components/UserInfo.js';
 
 // Добавление alt аватарке
 const photoDescription = () => {
-  avatarProfile.alt = 'Фото ' + profileElements.nameProfile.textContent + ' ' + 'Род занятий ' + profileElements.occupationProfile.textContent;
+  avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
 }
 
 photoDescription();
@@ -115,45 +65,56 @@ const cardList = new Section({
   }
 }, placesList);
 
-//Вставляем карточки из массива на страницу
-cardList.renderItems();
 
-//Функция с методом, который принимает новые данные пользователя и добавляет их на страницу
-const handleSubmitFormEditProfile = () => {
-  EditProfileUserInfo.setUserInfo();
+
+
+// Используем класс UserInfo для отображения и изменения информации в профиле пользователя
+const userInfo = new UserInfo(elementsSelectors);
+
+// Коллбэк функция для ввода новой информации на страницу
+const handleSubmitProfile = (data) => {
+  userInfo.setUserInfo(data);
 }
 
-// Используем класс PopupWithForm для открытия попапа профиля пользователя
-const popupWithFormEditProfile = new PopupWithForm(popupEditProfile, handleSubmitFormEditProfile);
+// Используем класс PopupWithForm для попапа профиля
+const popupWithFormProfile = new PopupWithForm(popupEditProfile, handleSubmitProfile);
 
-// Используем класс UserInfo для управления отображением информации о пользователе на странице
-const EditProfileUserInfo = new UserInfo (profileElements);
-
-// Вешаем слушатели на открытый попап формы
-popupWithFormEditProfile.setEventListeners();
-
-// Вешаем слушатель на кнопку открытия попапа профиля пользователя
+// Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
 buttonEditProfile.addEventListener('click', () => {
-  EditProfileUserInfo.getUserInfo();
-  popupWithFormEditProfile.openPopup();
+  const userData = userInfo.getUserInfo();
+  nameProfileInput.value = userData.name;
+  occupationProfileInput.value = userData.info;
+  popupWithFormProfile.openPopup();
   editFormValidator.resetValidation();
 })
 
-//Функция с методом, который принимает новые данные пользователя и добавляет их на страницу
-const handleSubmitFormAddPlace = () => {
+//  Вешаем обработчики на попап профиля
+popupWithFormProfile.setEventListeners();
+
+
+// Коллбэк функция добавления нового места пользователем на страницу
+const handleSubmitPlace = (data) => {
+  const cardData = {
+    name: data.newPlaceNameInput,
+    link: data.newPlaceLinkInput,
+  }
+  const newCard = new Card(cardData, cardTemplateSelector, handleCardClick);
+  const cardElement = newCard.createCard();
+  cardList.addItem(cardElement, true);
 
 }
 
-// Используем класс PopupWithForm для открытия попапа добавления нового места
-const popupWithFormAddPlace = new PopupWithForm(popupAddPlace, handleSubmitFormAddPlace);
+// Используем класс PopupWithForm для попапа профиля
+const popupWithFormPlace = new PopupWithForm(popupAddPlace, handleSubmitPlace);
 
-// Вешаем слушатели на открытый попап формы
-popupWithFormAddPlace.setEventListeners();
-
-// Вешаем слушатель на кнопку открытия попапа добавления нового места
+// Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
 buttonAddPlace.addEventListener('click', () => {
-  popupWithFormAddPlace.openPopup();
+  popupWithFormPlace.openPopup();
+  addCardFormValidator.resetValidation();
 })
 
+//  Вешаем обработчики на попап профиля
+popupWithFormPlace.setEventListeners();
 
-
+//Вставляем карточки
+cardList.renderItems();

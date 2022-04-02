@@ -37,15 +37,15 @@ export const popupEditProfile = document.querySelector(".popup_edit_profile");
 export const popupEditProfileForm = popupEditProfile.querySelector(".popup__inputs");
 export const buttonClosePopupEditProfile = popupEditProfile.querySelector(".popup__close-btn");
 
-// export const nameProfileInput = popupEditProfile.querySelector('.popup__input_type_fio');
-// export const jobProfileInput = popupEditProfile.querySelector('.popup__input_type_occupation');
-// export const nameProfile = document.querySelector('.profile__info-fio');
-// export const jobProfile = document.querySelector('.profile__info-occupation');
+export const nameProfileInput = popupEditProfile.querySelector('.popup__input_type_fio');
+export const occupationProfileInput = popupEditProfile.querySelector('.popup__input_type_occupation');
+export const nameProfile = document.querySelector('.profile__info-fio');
+export const occupationProfile = document.querySelector('.profile__info-occupation');
 
-export const profileElements = {
-  nameProfile: document.querySelector('.profile__info-fio'),
-  occupationProfile: document.querySelector('.profile__info-occupation'),
-  }
+export const elementsSelectors = {
+  nameProfile: '.profile__info-fio',
+  occupationProfile: '.profile__info-occupation',
+}
 
 export const avatarProfile = document.querySelector('.profile__avatar');
 
