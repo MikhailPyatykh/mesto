@@ -1,3 +1,5 @@
+import './index.css';
+
 import {
   initialCards,
   placesList,
@@ -47,7 +49,7 @@ addCardFormValidator.enableValidation();
 // Используем класс PopupWithImage для открытия картинки карточки места
 const popupWithImage = new PopupWithImage(popupView);
 
-// Функция с данными для картинки карточки места
+// Callback функция с данными для картинки карточки места
 const handleCardClick = (name, link) => {
   popupWithImage.openPopup(name, link);
 }
@@ -65,13 +67,10 @@ const cardList = new Section({
   }
 }, placesList);
 
-
-
-
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
-// Коллбэк функция для ввода новой информации на страницу
+// Callback функция для ввода новой информации на страницу
 const handleSubmitProfile = (data) => {
   userInfo.setUserInfo(data);
 }
@@ -88,11 +87,11 @@ buttonEditProfile.addEventListener('click', () => {
   editFormValidator.resetValidation();
 })
 
-//  Вешаем обработчики на попап профиля
+// Вешаем обработчики на попап профиля
 popupWithFormProfile.setEventListeners();
 
 
-// Коллбэк функция добавления нового места пользователем на страницу
+// Callback функция добавления нового места пользователем на страницу
 const handleSubmitPlace = (data) => {
   const cardData = {
     name: data.newPlaceNameInput,

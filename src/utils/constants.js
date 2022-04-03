@@ -1,26 +1,33 @@
+import karachaevskImg from '../images/cards/karachaevsk.png';
+import elbrusImg from '../images/cards/elbrus.png';
+import dombayImg from '../images/cards/dombay.png';
+import aktashImg from '../images/cards/aktash.png';
+import eltonImg from '../images/cards/elton.png';
+import primorieImg from '../images/cards/primorie.png';
+
 export const initialCards = [{
   name: 'Карачаево-Черкесия',
-  link: './images/cards/karachaevsk.png'
+  link: karachaevskImg
 },
 {
   name: 'Гора Эльбрус',
-  link: './images/cards/elbrus.png'
+  link: elbrusImg
 },
 {
   name: 'Домбай',
-  link: './images/cards/dombay.png'
+  link: dombayImg
 },
 {
   name: 'Акташ',
-  link: './images/cards/aktash.png'
+  link: aktashImg
 },
 {
   name: 'Озеро Эльтон',
-  link: './images/cards/elton.png'
+  link: eltonImg
 },
 {
   name: 'Приморье',
-  link: './images/cards/primorie.png'
+  link: primorieImg
 },
 ];
 
