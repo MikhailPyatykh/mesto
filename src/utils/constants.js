@@ -67,15 +67,11 @@ export const placeLinkInput = document.querySelector('.popup__input_type_link');
 export const popupView = document.querySelector(".popup_view");
 export const buttonClosePopupView = popupView.querySelector(".popup__close-btn");
 
-<<<<<<< HEAD:scripts/constants.js
 export const viewPicture = popupView.querySelector('.popup__picture');
 export const viewCaption = popupView.querySelector('.popup__caption');
-=======
-export const placesList = document.querySelector('.places__list');
 
 export const popupPicture = popupView.querySelector('.popup__picture');
 export const popupCaption = popupView.querySelector('.popup__caption');
->>>>>>> devSprint8_webpack:src/utils/constants.js
 
 export const placesList = document.querySelector('.places__list');
 export const popupOpenedClass = 'popup_opened';
