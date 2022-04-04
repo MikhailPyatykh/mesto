@@ -42,12 +42,7 @@ export class FormValidator {
       });
   }
 
-  _handleSubmit(event) {
-      event.preventDefault();
-  }
-
   enableValidation() {
-      this._form.addEventListener('submit', this._handleSubmit);
       this._form.addEventListener('input', () => this._setSubmitButtonState());
 
       this._inputs.forEach(input => input.addEventListener('input', () => this._handleField(input)));

@@ -47,7 +47,7 @@ editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
 // Используем класс PopupWithImage для открытия картинки карточки места
-const popupWithImage = new PopupWithImage(popupView);
+const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
 
 // Callback функция с данными для картинки карточки места
 const handleCardClick = (name, link) => {
@@ -57,15 +57,20 @@ const handleCardClick = (name, link) => {
 // Вешаем слушатели на картинку карточки места
 popupWithImage.setEventListeners();
 
+//Callback функция инициализации класса Card и создания карточки
+const initCard = (data, selector, callback) => {
+  const card = new Card(data, selector, callback);
+  const cardElement = card.createCard();
+  return cardElement;
+}
+
 //Формируем карточки из массива
 const cardList = new Section({
   data: initialCards,
   renderer: (item) => {
-    const card = new Card(item, cardTemplateSelector, handleCardClick);
-    const cardElement = card.createCard();
-    cardList.addItem(cardElement, false);
+    cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick), false);
   }
-}, placesList);
+}, elementsSelectors.placesList);
 
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
@@ -76,7 +81,7 @@ const handleSubmitProfile = (data) => {
 }
 
 // Используем класс PopupWithForm для попапа профиля
-const popupWithFormProfile = new PopupWithForm(popupEditProfile, handleSubmitProfile);
+const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile);
 
 // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
 buttonEditProfile.addEventListener('click', () => {
@@ -97,14 +102,11 @@ const handleSubmitPlace = (data) => {
     name: data.newPlaceNameInput,
     link: data.newPlaceLinkInput,
   }
-  const newCard = new Card(cardData, cardTemplateSelector, handleCardClick);
-  const cardElement = newCard.createCard();
-  cardList.addItem(cardElement, true);
-
+  cardList.addItem(initCard(cardData, cardTemplateSelector, handleCardClick), true);
 }
 
 // Используем класс PopupWithForm для попапа профиля
-const popupWithFormPlace = new PopupWithForm(popupAddPlace, handleSubmitPlace);
+const popupWithFormPlace = new PopupWithForm(elementsSelectors.popupAddPlace, handleSubmitPlace);
 
 // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
 buttonAddPlace.addEventListener('click', () => {

@@ -3,8 +3,8 @@ import Popup from '../components/Popup.js';
 export default class PopupWithImage extends Popup {
     constructor(popupSelector) {
         super(popupSelector);
-        this._popupPicture = popupSelector.querySelector('.popup__picture');
-        this._popupCaption = popupSelector.querySelector('.popup__caption');
+        this._popupPicture = this._popup.querySelector('.popup__picture');
+        this._popupCaption = this._popup.querySelector('.popup__caption');
     }
 
     openPopup(name, link) {
@@ -12,9 +12,5 @@ export default class PopupWithImage extends Popup {
         this._popupCaption.textContent = name;
         this._popupPicture.alt = 'Вид на ' + name;
         super.openPopup();
-    }
-
-    setEventListeners() {
-      super.setEventListeners();
     }
 }
