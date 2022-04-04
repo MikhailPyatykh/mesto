@@ -2,14 +2,10 @@ import './index.css';
 
 import {
   initialCards,
-  placesList,
   cardTemplateSelector,
-  popupEditProfile,
-  popupAddPlace,
   buttonEditProfile,
   buttonAddPlace,
   formsValidationConfig,
-  popupView,
   avatarProfile,
   elementsSelectors,
   nameProfile,
