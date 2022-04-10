@@ -104,7 +104,7 @@ const handleSubmitPlace = (data) => {
 // Используем класс PopupWithForm для попапа профиля
 const popupWithFormPlace = new PopupWithForm(elementsSelectors.popupAddPlace, handleSubmitPlace);
 
-// Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
+// Вешаем обработчик на кнопку открытия формы для добавления нового места
 buttonAddPlace.addEventListener('click', () => {
   popupWithFormPlace.openPopup();
   addCardFormValidator.resetValidation();
