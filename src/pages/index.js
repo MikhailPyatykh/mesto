@@ -1,5 +1,7 @@
 import './index.css';
 
+import Api from '../components/Api.js';
+
 import {
   initialCards,
   cardTemplateSelector,
@@ -35,6 +37,20 @@ const photoDescription = () => {
 }
 
 photoDescription();
+
+const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
+  headers: {
+    authorization: 'da546cc6-febd-4e48-90b5-e55f89894793',
+    'Accept': 'application/json',
+    'Content-Type': 'application/json; charset=utf-8'
+  }
+});
+
+api.getInitialCards().then((cards) => {
+  const apinitialCards = cards;
+  console.log(apinitialCards);
+  return apinitialCards;
+})
 
 // Используем класс FormValidator для валидации форм
 const editFormValidator = new FormValidator(formsValidationConfig, editProfileInputs);
