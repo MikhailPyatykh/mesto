@@ -46,19 +46,10 @@ const api = new Api('https://mesto.nomoreparties.co/v1/cohort-38/cards', {
   }
 });
 
+
+
 api.getInitialCards().then((cards) => {
-  const apinitialCards = cards;
-  console.log(apinitialCards);
-  return apinitialCards;
-})
-
-// Используем класс FormValidator для валидации форм
-const editFormValidator = new FormValidator(formsValidationConfig, editProfileInputs);
-const addCardFormValidator = new FormValidator(formsValidationConfig, newPlaceInputs);
-editFormValidator.enableValidation();
-addCardFormValidator.enableValidation();
-
-// Используем класс PopupWithImage для открытия картинки карточки места
+  // Используем класс PopupWithImage для открытия картинки карточки места
 const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
 
 // Callback функция с данными для картинки карточки места
@@ -78,11 +69,48 @@ const initCard = (data, selector, callback) => {
 
 //Формируем карточки из массива
 const cardList = new Section({
-  data: initialCards,
+  data: cards,
   renderer: (item) => {
     cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick), false);
   }
 }, elementsSelectors.placesList);
+
+//Вставляем карточки
+cardList.renderItems();
+});
+
+
+// Используем класс FormValidator для валидации форм
+const editFormValidator = new FormValidator(formsValidationConfig, editProfileInputs);
+const addCardFormValidator = new FormValidator(formsValidationConfig, newPlaceInputs);
+editFormValidator.enableValidation();
+addCardFormValidator.enableValidation();
+
+// // Используем класс PopupWithImage для открытия картинки карточки места
+// const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
+
+// // Callback функция с данными для картинки карточки места
+// const handleCardClick = (name, link) => {
+//   popupWithImage.openPopup(name, link);
+// }
+
+// // Вешаем слушатели на картинку карточки места
+// popupWithImage.setEventListeners();
+
+// //Callback функция инициализации класса Card и создания карточки
+// const initCard = (data, selector, callback) => {
+//   const card = new Card(data, selector, callback);
+//   const cardElement = card.createCard();
+//   return cardElement;
+// }
+
+// //Формируем карточки из массива
+// const cardList = new Section({
+//   data: initialCards,
+//   renderer: (item) => {
+//     cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick), false);
+//   }
+// }, elementsSelectors.placesList);
 
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
@@ -129,5 +157,4 @@ buttonAddPlace.addEventListener('click', () => {
 //  Вешаем обработчики на попап профиля
 popupWithFormPlace.setEventListeners();
 
-//Вставляем карточки
-cardList.renderItems();
+
