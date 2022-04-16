@@ -2,7 +2,7 @@
   position: absolute;
   top: 20px;
   right: 20px;
-  display: grid;
+  display: none;
   border: none;
   background: 18px 19px;
   background-image: url(../../../images/icon-basket.svg);

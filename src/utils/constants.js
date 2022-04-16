@@ -1,36 +1,3 @@
-import karachaevskImg from '../images/cards/karachaevsk.png';
-import elbrusImg from '../images/cards/elbrus.png';
-import dombayImg from '../images/cards/dombay.png';
-import aktashImg from '../images/cards/aktash.png';
-import eltonImg from '../images/cards/elton.png';
-import primorieImg from '../images/cards/primorie.png';
-
-export const initialCards = [{
-  name: 'Карачаево-Черкесия',
-  link: karachaevskImg
-},
-{
-  name: 'Гора Эльбрус',
-  link: elbrusImg
-},
-{
-  name: 'Домбай',
-  link: dombayImg
-},
-{
-  name: 'Акташ',
-  link: aktashImg
-},
-{
-  name: 'Озеро Эльтон',
-  link: eltonImg
-},
-{
-  name: 'Приморье',
-  link: primorieImg
-},
-];
-
 export const formsValidationConfig = {
 formSelector: '.popup__inputs',
 inputSelector: '.popup__input',
@@ -46,6 +13,14 @@ export const elementsSelectors = {
   placesList: '.places__list',
   popupEditProfile: '.popup_edit_profile',
   popupAddPlace: '.popup_add_place',
+}
+
+export const urls = {
+  profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me',
+  cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards',
+  cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/cardId',
+  cardsIdUrlLikes: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/cardId/likes',
+  avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me/avatar'
 }
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');

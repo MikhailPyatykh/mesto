@@ -1,15 +1,12 @@
 export default class Api {
-  constructor(url, headers) {
-    this._url = url;
+  constructor(headers) {
     this._headers = headers;
   }
 
-  getInitialCards() {
-    return fetch(this._url, {
+  getObj(url) {
+    return fetch(url, {
       method: 'GET',
-      headers: {
-        authorization: 'da546cc6-febd-4e48-90b5-e55f89894793'
-      }
+      headers: this._headers
     }).then((res) => {
       if (res.ok) {
         return res.json();
