@@ -64,28 +64,7 @@ addCardFormValidator.enableValidation();
 
 
 
-// // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
-// const userInfo = new UserInfo(elementsSelectors);
 
-// // Callback функция для ввода новой информации на страницу
-// const handleSubmitProfile = (data) => {
-//   userInfo.setUserInfo(data);
-// }
-
-// // Используем класс PopupWithForm для попапа профиля
-// const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile);
-
-// // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
-// buttonEditProfile.addEventListener('click', () => {
-//   const userData = userInfo.getUserInfo();
-//   nameProfileInput.value = userData.name;
-//   occupationProfileInput.value = userData.info;
-//   popupWithFormProfile.openPopup();
-//   editFormValidator.resetValidation();
-// })
-
-// // Вешаем обработчики на попап профиля
-// popupWithFormProfile.setEventListeners();
 
 
 // // Callback функция добавления нового места пользователем на страницу
@@ -118,14 +97,14 @@ const api = new Api({
   'Content-type': 'application/json; charset=utf-8'
 });
 
-api.getObj(urls.profileUrl).then(data => {
-  // Заполняем информацию профиля с сервера
+api.getData(urls.profileUrl).then(data => {
+  // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
       nameProfile.textContent = data.name;
       occupationProfile.textContent = data.about;
       avatarProfile.src = data.avatar;
       const profileData = data;
       return profileData;
-}).then((profileData) => api.getObj(urls.cardsUrl).then((cards) => {
+}).then((profileData) => api.getData(urls.cardsUrl).then((cards) => {
   //Формируем карточки из массива
   const cardList = new Section({
     data: cards,
@@ -138,3 +117,33 @@ api.getObj(urls.profileUrl).then(data => {
   cardList.renderItems();
 
   }));
+
+
+// Используем класс UserInfo для отображения и изменения информации в профиле пользователя
+const userInfo = new UserInfo(elementsSelectors);
+
+// // Callback функция для ввода новой информации на страницу
+// const handleSubmitProfile = (data) => {
+//   userInfo.setUserInfo(data);
+// }
+
+// Callback функция для ввода новой информации на страницу
+const handleSubmitProfile = (data) => {
+  console.log(data);
+  userInfo.setUserInfo(data);
+}
+
+// Используем класс PopupWithForm для попапа профиля
+const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile);
+
+// Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
+buttonEditProfile.addEventListener('click', () => {
+  const userData = userInfo.getUserInfo();
+  nameProfileInput.value = userData.name;
+  occupationProfileInput.value = userData.info;
+  popupWithFormProfile.openPopup();
+  editFormValidator.resetValidation();
+})
+
+// Вешаем обработчики на попап профиля
+popupWithFormProfile.setEventListeners();

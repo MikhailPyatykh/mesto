@@ -3,11 +3,8 @@ export default class Api {
     this._headers = headers;
   }
 
-  getObj(url) {
-    return fetch(url, {
-      method: 'GET',
-      headers: this._headers
-    }).then((res) => {
+  _makeRequest(promise) {
+    return promise.then((res) => {
       if (res.ok) {
         return res.json();
       }
@@ -18,5 +15,21 @@ export default class Api {
       console.error(err);
     })
   }
+
+  getData(url) {
+    return this._makeRequest(fetch(url, {
+      method: 'GET',
+      headers: this._headers
+    }));
+  }
+
+  createData(url) {
+    return this._makeRequest(fetch(url, {
+      method: 'PATCH',
+      headers: this._headers,
+      body: JSON.stringify({ fio, occupation })}));
+  }
+
+
 }
 
