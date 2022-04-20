@@ -23,13 +23,22 @@ export default class Api {
     }));
   }
 
-  createData(url) {
+  patchData(url, data) {
     return this._makeRequest(fetch(url, {
       method: 'PATCH',
       headers: this._headers,
-      body: JSON.stringify({ fio, occupation })}));
+      body: JSON.stringify({ name: data.nameInput, about: data.occupationInput })
+    })
+    );
   }
 
-
+  postData(url, data) {
+    return this._makeRequest(fetch(url, {
+      method: 'POST',
+      headers: this._headers,
+      body: JSON.stringify({ name: data.newPlaceNameInput, link: data.newPlaceLinkInput })
+    })
+    );
+  }
 }
 

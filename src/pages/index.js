@@ -62,34 +62,6 @@ const addCardFormValidator = new FormValidator(formsValidationConfig, newPlaceIn
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
 
-
-
-
-
-
-// // Callback функция добавления нового места пользователем на страницу
-// const handleSubmitPlace = (data) => {
-//   const cardData = {
-//     name: data.newPlaceNameInput,
-//     link: data.newPlaceLinkInput,
-//   }
-//   cardList.addItem(initCard(cardData, cardTemplateSelector, handleCardClick), true);
-// }
-
-// // Используем класс PopupWithForm для попапа профиля
-// const popupWithFormPlace = new PopupWithForm(elementsSelectors.popupAddPlace, handleSubmitPlace);
-
-// // Вешаем обработчик на кнопку открытия формы для добавления нового места
-// buttonAddPlace.addEventListener('click', () => {
-//   popupWithFormPlace.openPopup();
-//   addCardFormValidator.resetValidation();
-// })
-
-// //  Вешаем обработчики на попап профиля
-// popupWithFormPlace.setEventListeners();
-
-
-
 // Инициализируем класс Api
 const api = new Api({
   authorization: 'da546cc6-febd-4e48-90b5-e55f89894793',
@@ -112,29 +84,23 @@ api.getData(urls.profileUrl).then(data => {
       cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick, profileData), false);
     }
   }, elementsSelectors.placesList);
-
   //Вставляем карточки
   cardList.renderItems();
-
   }));
 
 
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
-// // Callback функция для ввода новой информации на страницу
-// const handleSubmitProfile = (data) => {
-//   userInfo.setUserInfo(data);
-// }
-
 // Callback функция для ввода новой информации на страницу
 const handleSubmitProfile = (data) => {
-  console.log(data);
   userInfo.setUserInfo(data);
 }
 
 // Используем класс PopupWithForm для попапа профиля
-const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile);
+const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile, api, 'patchData', urls.profileUrl);
+// const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, data => api.patchData(urls.profileUrl, data).then(handleSubmitProfile));
+
 
 // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
 buttonEditProfile.addEventListener('click', () => {
@@ -147,3 +113,26 @@ buttonEditProfile.addEventListener('click', () => {
 
 // Вешаем обработчики на попап профиля
 popupWithFormProfile.setEventListeners();
+
+
+// // Callback функция добавления нового места пользователем на страницу
+// const handleSubmitPlace = (data) => {
+//   const cardData = {
+//     name: data.newPlaceNameInput,
+//     link: data.newPlaceLinkInput,
+//   }
+//   cardList.addItem(initCard(cardData, cardTemplateSelector, handleCardClick), true);
+// }
+
+// // Используем класс PopupWithForm для попапа нового места
+// const popupWithFormPlace = new PopupWithForm(elementsSelectors.popupAddPlace, handleSubmitPlace, api, 'postData', urls.cardsUrl);
+
+// // Вешаем обработчик на кнопку открытия формы для добавления нового места
+// buttonAddPlace.addEventListener('click', () => {
+//   popupWithFormPlace.openPopup();
+//   addCardFormValidator.resetValidation();
+// })
+
+// //  Вешаем обработчики на попап профиля
+// popupWithFormPlace.setEventListeners();
+

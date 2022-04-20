@@ -16,9 +16,6 @@ export default class Card {
           evt.target.classList.toggle('place__icon-heart_active');
       });
 
-      // console.log(this._item.owner._id);
-      // console.log('ID: ' + this._profileData._id);
-
       if (this._item.owner._id === this._profileData._id) {
         this._buttonDelete.addEventListener('click', () => {
           this._place.remove();
