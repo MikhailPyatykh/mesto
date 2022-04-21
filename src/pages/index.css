@@ -18,9 +18,11 @@
 @import url(../blocks/place/__card-info/place__card-info.css);
 @import url(../blocks/place/__title/place__title.css);
 @import url(../blocks/place/__icon-basket/place__icon-basket.css);
+@import url(../blocks/place/__likes/place__likes.css);
 @import url(../blocks/place/__icon-basket/_active/place__icon-basket_active.css);
-@import url(../blocks/place/__icon-heart/place__icon-heart.css);
-@import url(../blocks/place/__icon-heart/_active/place__icon-heart_active.css);
+@import url(../blocks/place/__likes/_icon-heart/place__likes_icon-heart.css);
+@import url(../blocks/place/__likes/_icon-heart/_active/place__likes_icon-heart_active.css);
+@import url(../blocks/place/__likes/_number/place__likes_numbers.css);
 @import url(../blocks/footer/footer.css);
 @import url(../blocks/footer/__copyright/footer__copyright.css);
 @import url(../blocks/popup/popup.css);

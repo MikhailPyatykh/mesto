@@ -5,7 +5,8 @@ export default class Card {
       this._place = this._template.cloneNode(true);
       this._cardImage = this._place.querySelector('.place__image');
       this._cardTitle = this._place.querySelector('.place__title');
-      this._buttonLike = this._place.querySelector('.place__icon-heart');
+      this._buttonLike = this._place.querySelector('.place__likes_icon-heart');
+      this._likesNumbers = this._place.querySelector('.place__likes_numbers');
       this._buttonDelete = this._place.querySelector('.place__icon-basket');
       this._profileData = profileData;
       this._handleCardClick = handleCardClick;
@@ -13,10 +14,11 @@ export default class Card {
 
   _setEventListeners() {
       this._buttonLike.addEventListener('click', evt => {
-          evt.target.classList.toggle('place__icon-heart_active');
+          evt.target.classList.toggle('place__likes_icon-heart_active');
       });
 
       if (this._item.owner._id === this._profileData._id) {
+        this._buttonDelete.classList.add('place__icon-basket_active');
         this._buttonDelete.addEventListener('click', () => {
           this._place.remove();
       });
@@ -28,19 +30,13 @@ export default class Card {
       });
   }
 
-  _checkID() {
-    if (this._item.owner._id === this._profileData._id) {
-      this._buttonDelete.classList.add('place__icon-basket_active');
-    }
-  }
-
   createCard() {
       this._cardTitle.textContent = this._item.name;
       this._cardImage.src = this._item.link;
       this._cardImage.alt = 'Вид на ' + this._item.name;
+      this._likesNumbers.textContent = this._item.likes.length;
 
       this._setEventListeners();
-      this._checkID();
 
       return this._place;
   }
