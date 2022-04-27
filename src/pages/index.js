@@ -28,6 +28,8 @@ import PopupWithImage from '../components/PopupWithImage.js';
 
 import PopupWithForm from '../components/PopupWithForm.js';
 
+import PopupDeleteCard from '../components/PopupDeleteCard.js';
+
 import UserInfo from '../components/UserInfo.js';
 
 
@@ -46,12 +48,13 @@ const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
 
+
 // Вешаем слушатели на картинку карточки места
 popupWithImage.setEventListeners();
 
 //Callback функция инициализации класса Card и создания карточки
-const initCard = (data, selector, callback, dataID) => {
-    const card = new Card(data, selector, callback, dataID);
+const initCard = (data, selector, callbackCardClick, dataID, callbackBusketClick) => {
+    const card = new Card(data, selector, callbackCardClick, dataID, callbackBusketClick);
     const cardElement = card.createCard();
     return cardElement;
 }
@@ -69,6 +72,31 @@ const api = new Api({
     'Content-type': 'application/json; charset=utf-8'
 });
 
+
+// Callback функция для сабмита удаления карточки
+const handleSubmitDelete = (id) => {
+  console.log(id);
+}
+
+// Callback функция для кнопки удаления карточки места
+const handleBasketClick = (id) => {
+  popupDeleteCard.openPopup();
+  const cardID = id;
+  console.log(cardID);
+  return cardID;
+}
+
+// console.log(handleBasketClick.cardID);
+
+// Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
+const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, handleSubmitDelete, api, 'deleteData', urls.cardsIdUrl, handleBasketClick)
+
+//  Вешаем обработчики на попап удаления карточки
+popupDeleteCard.setEventListeners();
+
+// Используем класс UserInfo для отображения и изменения информации в профиле пользователя
+const userInfo = new UserInfo(elementsSelectors);
+
 api.getData(urls.profileUrl).then(data => {
     // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
     nameProfile.textContent = data.name;
@@ -77,17 +105,16 @@ api.getData(urls.profileUrl).then(data => {
     const profileData = data;
     return profileData;
 }).then((profileData) => api.getData(urls.cardsUrl).then((cards) => {
+
     //Формируем карточки из массива
     const cardList = new Section({
         data: cards,
         renderer: (item) => {
-            console.log(item);
-            cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick, profileData), false);
+            cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick, profileData, handleBasketClick), false);
         }
     }, elementsSelectors.placesList);
 
-    // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
-    const userInfo = new UserInfo(elementsSelectors);
+
 
     // Callback функция для ввода новой информации на страницу
     const handleSubmitProfile = (data) => {
@@ -112,7 +139,7 @@ api.getData(urls.profileUrl).then(data => {
 
     // Callback функция добавления нового места пользователем на страницу
     const handleSubmitPlace = (data) => {
-        cardList.addItem(initCard(data, cardTemplateSelector, handleCardClick, profileData), true);
+        cardList.addItem(initCard(data, cardTemplateSelector, handleCardClick, profileData, handleBasketClick), true);
     }
 
     // Используем класс PopupWithForm для попапа нового места
@@ -127,6 +154,9 @@ api.getData(urls.profileUrl).then(data => {
     //  Вешаем обработчики на попап профиля
     popupWithFormPlace.setEventListeners();
 
+
+
     //Вставляем карточки
     cardList.renderItems();
 }));
+

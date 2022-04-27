@@ -13,12 +13,13 @@ export const elementsSelectors = {
   placesList: '.places__list',
   popupEditProfile: '.popup_edit_profile',
   popupAddPlace: '.popup_add_place',
+  popupDeleteCard: '.popup_delete-card',
 }
 
 export const urls = {
   profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me',
   cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards',
-  cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/cardId',
+  cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
   cardsIdUrlLikes: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/cardId/likes',
   avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me/avatar'
 }

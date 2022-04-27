@@ -40,5 +40,13 @@ export default class Api {
     })
     );
   }
+
+  deleteData(url, data) {
+    return this._makeRequest(fetch(`${url}${data}`, {
+      method: 'DELETE',
+      headers: this._headers,
+        })
+    );
+  }
 }
 

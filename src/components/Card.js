@@ -1,5 +1,5 @@
 export default class Card {
-  constructor(item, cardTemplateSelector, handleCardClick, profileData) {
+  constructor(item, cardTemplateSelector, handleCardClick, profileData, handleBasketClick) {
       this._item = item
       this._template = document.querySelector(cardTemplateSelector).content.querySelector('.place');
       this._place = this._template.cloneNode(true);
@@ -10,6 +10,7 @@ export default class Card {
       this._buttonDelete = this._place.querySelector('.place__icon-basket');
       this._profileData = profileData;
       this._handleCardClick = handleCardClick;
+      this._handleBasketClick = handleBasketClick;
   }
 
   _setEventListeners() {
@@ -20,10 +21,9 @@ export default class Card {
       if (this._item.owner._id === this._profileData._id) {
         this._buttonDelete.classList.add('place__icon-basket_active');
         this._buttonDelete.addEventListener('click', () => {
-          this._place.remove();
-      });
+          this._handleBasketClick(this._item._id);
+        });
       }
-
 
       this._cardImage.addEventListener('click', () => {
         this._handleCardClick(this._item.name, this._item.link);
