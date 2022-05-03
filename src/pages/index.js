@@ -32,7 +32,6 @@ import PopupDeleteCard from '../components/PopupDeleteCard.js';
 
 import UserInfo from '../components/UserInfo.js';
 
-
 // Добавление alt аватарке
 const photoDescription = () => {
     avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
@@ -47,7 +46,6 @@ const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
 const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
-
 
 // Вешаем слушатели на картинку карточки места
 popupWithImage.setEventListeners();
@@ -72,28 +70,6 @@ const api = new Api({
     'Content-type': 'application/json; charset=utf-8'
 });
 
-
-// Callback функция для сабмита удаления карточки
-const handleSubmitDelete = (id) => {
-  console.log(id);
-}
-
-// Callback функция для кнопки удаления карточки места
-const handleBasketClick = (id) => {
-  popupDeleteCard.openPopup();
-  const cardID = id;
-  console.log(cardID);
-  return cardID;
-}
-
-// console.log(handleBasketClick.cardID);
-
-// Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
-const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, handleSubmitDelete, api, 'deleteData', urls.cardsIdUrl, handleBasketClick)
-
-//  Вешаем обработчики на попап удаления карточки
-popupDeleteCard.setEventListeners();
-
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
@@ -105,7 +81,6 @@ api.getData(urls.profileUrl).then(data => {
     const profileData = data;
     return profileData;
 }).then((profileData) => api.getData(urls.cardsUrl).then((cards) => {
-
     //Формируем карточки из массива
     const cardList = new Section({
         data: cards,
@@ -113,8 +88,6 @@ api.getData(urls.profileUrl).then(data => {
             cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick, profileData, handleBasketClick), false);
         }
     }, elementsSelectors.placesList);
-
-
 
     // Callback функция для ввода новой информации на страницу
     const handleSubmitProfile = (data) => {
@@ -137,6 +110,28 @@ api.getData(urls.profileUrl).then(data => {
     // Вешаем обработчики на попап профиля
     popupWithFormProfile.setEventListeners();
 
+
+    // ---------------------------------------------------START
+
+    // Callback функция для кнопки удаления карточки места
+    const handleBasketClick = (id) => {
+        popupDeleteCard.openPopup();
+        popupDeleteCard.cardID(id);
+    }
+
+    // Callback функция для сабмита удаления карточки
+    const handleSubmitDelete = (data) => {
+        console.log(data);
+    }
+
+    // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
+    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, handleSubmitDelete, api, 'deleteData', urls.cardsIdUrl)
+
+    //  Вешаем обработчики на попап удаления карточки
+    popupDeleteCard.setEventListeners();
+
+    // ---------------------------------------------------END
+
     // Callback функция добавления нового места пользователем на страницу
     const handleSubmitPlace = (data) => {
         cardList.addItem(initCard(data, cardTemplateSelector, handleCardClick, profileData, handleBasketClick), true);
@@ -154,9 +149,6 @@ api.getData(urls.profileUrl).then(data => {
     //  Вешаем обработчики на попап профиля
     popupWithFormPlace.setEventListeners();
 
-
-
     //Вставляем карточки
     cardList.renderItems();
 }));
-

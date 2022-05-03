@@ -9,11 +9,15 @@ export default class PopupDeleteCard extends Popup {
       this._url = url;
     }
 
+    cardID(data) {
+      return data;
+    }
+
     setEventListeners() {
       super.setEventListeners();
       this._popup.addEventListener('submit', (evt) => {
         evt.preventDefault();
-        this._handleSubmit();
+        this._handleSubmit(this.cardID);
         this.closePopup();
       });
       };

@@ -30,6 +30,13 @@ export default class Card {
       });
   }
 
+  // cardID() {
+  //   console.log('Card ID');
+  //   return {
+  //     id: this._item._id,
+  //   }
+  // }
+
   createCard() {
       this._cardTitle.textContent = this._item.name;
       this._cardImage.src = this._item.link;
