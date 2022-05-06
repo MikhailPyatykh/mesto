@@ -19,5 +19,11 @@ export default class Section {
       this._renderer(item);
     });
   }
+
+  getItem() {
+    this._renderedItems.forEach(item => {
+      return item;
+      })
+  }
 }
 

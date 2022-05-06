@@ -113,11 +113,7 @@ api.getData(urls.profileUrl).then(data => {
 
     // ---------------------------------------------------START
 
-    // Callback функция для кнопки удаления карточки места
-    const handleBasketClick = (id) => {
-        popupDeleteCard.openPopup();
-        popupDeleteCard.cardID(id);
-    }
+
 
     // Callback функция для сабмита удаления карточки
     const handleSubmitDelete = (data) => {
@@ -125,7 +121,17 @@ api.getData(urls.profileUrl).then(data => {
     }
 
     // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
-    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, handleSubmitDelete, api, 'deleteData', urls.cardsIdUrl)
+    const popupDeleteCard = new PopupDeleteCard(
+                            elementsSelectors.popupDeleteCard,
+                            handleSubmitDelete,
+                            api,
+                            'deleteData',
+                            urls.cardsIdUrl)
+
+    // Callback функция для кнопки удаления карточки места
+    const handleBasketClick = () => {
+      popupDeleteCard.openPopup();
+    }
 
     //  Вешаем обработчики на попап удаления карточки
     popupDeleteCard.setEventListeners();
