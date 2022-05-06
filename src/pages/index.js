@@ -89,6 +89,8 @@ api.getData(urls.profileUrl).then(data => {
         }
     }, elementsSelectors.placesList);
 
+    // console.log(cards);
+
     // Callback функция для ввода новой информации на страницу
     const handleSubmitProfile = (data) => {
         userInfo.setUserInfo(data);
@@ -112,26 +114,13 @@ api.getData(urls.profileUrl).then(data => {
 
 
     // ---------------------------------------------------START
-
-
-
-    // Callback функция для сабмита удаления карточки
-    const handleSubmitDelete = (data) => {
-        console.log(data);
+    // Callback функция для кнопки удаления карточки места
+    const handleBasketClick = (id) => {
+      popupDeleteCard.openPopup(id);
     }
 
     // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
-    const popupDeleteCard = new PopupDeleteCard(
-                            elementsSelectors.popupDeleteCard,
-                            handleSubmitDelete,
-                            api,
-                            'deleteData',
-                            urls.cardsIdUrl)
-
-    // Callback функция для кнопки удаления карточки места
-    const handleBasketClick = () => {
-      popupDeleteCard.openPopup();
-    }
+    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, api, 'deleteData', urls.cardsIdUrl)
 
     //  Вешаем обработчики на попап удаления карточки
     popupDeleteCard.setEventListeners();

@@ -14,6 +14,7 @@ export const elementsSelectors = {
   popupEditProfile: '.popup_edit_profile',
   popupAddPlace: '.popup_add_place',
   popupDeleteCard: '.popup_delete-card',
+  placeID: '.place__id',
 }
 
 export const urls = {

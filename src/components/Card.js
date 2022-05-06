@@ -7,6 +7,7 @@ export default class Card {
       this._cardTitle = this._place.querySelector('.place__title');
       this._buttonLike = this._place.querySelector('.place__likes_icon-heart');
       this._likesNumbers = this._place.querySelector('.place__likes_numbers');
+      this._placeID = this._place.querySelector('.place__id');
       this._buttonDelete = this._place.querySelector('.place__icon-basket');
       this._profileData = profileData;
       this._handleCardClick = handleCardClick;
@@ -32,6 +33,7 @@ export default class Card {
 
   createCard() {
       this._cardTitle.textContent = this._item.name;
+      this._placeID.dataset.id = this._item._id;
       this._cardImage.src = this._item.link;
       this._cardImage.alt = 'Вид на ' + this._item.name;
       this._likesNumbers.textContent = this._item.likes.length;
