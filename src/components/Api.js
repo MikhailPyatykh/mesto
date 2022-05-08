@@ -16,14 +16,14 @@ export default class Api {
     })
   }
 
-  getData(url) {
+  getCards(url) {
     return this._makeRequest(fetch(url, {
       method: 'GET',
       headers: this._headers
     }));
   }
 
-  patchData(url, data) {
+  patchProfileInfo(url, data) {
     return this._makeRequest(fetch(url, {
       method: 'PATCH',
       headers: this._headers,
@@ -32,7 +32,7 @@ export default class Api {
     );
   }
 
-  postData(url, data) {
+  postNewCard(url, data) {
     return this._makeRequest(fetch(url, {
       method: 'POST',
       headers: this._headers,
@@ -41,12 +41,33 @@ export default class Api {
     );
   }
 
-  deleteData(url, data) {
+  deleteCard(url, data) {
     return this._makeRequest(fetch(`${url}${data}`, {
       method: 'DELETE',
       headers: this._headers,
-        })
+      })
     );
   }
+
+  putLike(url, data) {
+    return this._makeRequest(fetch(`${url}${data._id}/likes`, {
+      method: 'PUT',
+      headers: this._headers,
+    })
+    );
+  }
+
+  deleteLike(url, data) {
+    return this._makeRequest(fetch(`${url}${data._id}/likes`, {
+      method: 'DELETE',
+      headers: this._headers,
+    })
+    );
+  }
+
+  checkLikeID(array, data) {
+    const arrayLikes = array.likes;
+    return arrayLikes.find(element => element._id === data.id);
+  };
 }
 

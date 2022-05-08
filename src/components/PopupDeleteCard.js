@@ -6,12 +6,12 @@ export default class PopupDeleteCard extends Popup {
       this._api = api;
       this._method = method;
       this._url = url;
-
     }
 
-    openPopup(id) {
+    openPopup(id, card) {
       super.openPopup();
       this._id = id;
+      this._card = card;
     }
 
     setEventListeners() {
@@ -19,6 +19,7 @@ export default class PopupDeleteCard extends Popup {
       this._popup.addEventListener('submit', (evt) => {
         evt.preventDefault();
         this._api[this._method](this._url, this._id)
+        .then(this._card.remove());
         this.closePopup();
       })
     }

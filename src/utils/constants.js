@@ -21,7 +21,7 @@ export const urls = {
   profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me',
   cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards',
   cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
-  cardsIdUrlLikes: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/cardId/likes',
+  cardsIdUrlLikes: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
   avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me/avatar'
 }
 
