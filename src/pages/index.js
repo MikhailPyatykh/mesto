@@ -47,16 +47,20 @@ const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
 
-const handleLikeClick = (dataID, profileID) => {
-  const dataLikes = dataID.likes;
+
+// Callback функция обработки нажатия лайка
+const handleLikeClick = (dataID, profileID, likesButtonSelector) => {
+  // console.log(api.checkLikeID(dataID, profileID));
   if (api.checkLikeID(dataID, profileID)) {
-    api.putLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      dataLikes.textContent = data.likes.length;
+    api.deleteLike(urls.cardsIdUrlLikes, dataID).then(data => {
+      console.log(data.likes.length);
+      likesButtonSelector.textContent = data.likes.length;
     })
   }
   else {
-    api.deleteLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      dataLikes.textContent = data.likes.length;
+    api.putLike(urls.cardsIdUrlLikes, dataID).then(data => {
+      console.log(data.likes.length);
+      likesButtonSelector.textContent = data.likes.length;
     })
   }
 }
@@ -65,8 +69,24 @@ const handleLikeClick = (dataID, profileID) => {
 popupWithImage.setEventListeners();
 
 //Callback функция инициализации класса Card и создания карточки
-const initCard = (data, selector, callbackCardClick, dataID, callbackBusketClick, callbackLikeClick, callbackLikeStatus) => {
-    const card = new Card(data, selector, callbackCardClick, dataID, callbackBusketClick, callbackLikeClick, callbackLikeStatus);
+const initCard = (
+        data,
+        selector,
+        callbackCardClick,
+        dataID,
+        callbackBusketClick,
+        callbackLikeClick,
+        callbackLikeStatus
+        ) => {
+    const card = new Card(
+        data,
+        selector,
+        callbackCardClick,
+        dataID,
+        callbackBusketClick,
+        callbackLikeClick,
+        callbackLikeStatus
+        );
     const cardElement = card.createCard();
     return cardElement;
 }
@@ -99,12 +119,17 @@ api.getCards(urls.profileUrl).then(data => {
     const cardList = new Section({
         data: cards,
         renderer: (item) => {
-            cardList.addItem(initCard(item, cardTemplateSelector, handleCardClick, profileData, handleBasketClick, handleLikeClick, api.checkLikeID(item, profileData)), false);
+            cardList.addItem(initCard(
+              item,
+              cardTemplateSelector,
+              handleCardClick,
+              profileData,
+              handleBasketClick,
+              handleLikeClick,
+              api.checkLikeID(item, profileData)
+              ), false);
         }
     }, elementsSelectors.placesList);
-
-    console.log(cards);
-    console.log(profileData);
 
     // Callback функция для ввода новой информации на страницу
     const handleSubmitProfile = (data) => {
@@ -112,7 +137,13 @@ api.getCards(urls.profileUrl).then(data => {
     }
 
     // Используем класс PopupWithForm для попапа профиля
-    const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, handleSubmitProfile, api, 'patchProfileInfo', urls.profileUrl);
+    const popupWithFormProfile = new PopupWithForm(
+      elementsSelectors.popupEditProfile,
+      handleSubmitProfile,
+      api,
+      'patchProfileInfo',
+      urls.profileUrl);
+
     // const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, data => api.patchData(urls.profileUrl, data).then(handleSubmitProfile));
 
     // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
@@ -140,11 +171,24 @@ api.getCards(urls.profileUrl).then(data => {
 
     // Callback функция добавления нового места пользователем на страницу
     const handleSubmitPlace = (data) => {
-        cardList.addItem(initCard(data, cardTemplateSelector, handleCardClick, profileData, handleBasketClick, handleLikeClick, api.checkLikeID(data, profileData)), true);
+        cardList.addItem(initCard(
+          data,
+          cardTemplateSelector,
+          handleCardClick,
+          profileData,
+          handleBasketClick,
+          handleLikeClick,
+          api.checkLikeID(data, profileData)
+          ), true);
     }
 
     // Используем класс PopupWithForm для попапа нового места
-    const popupWithFormPlace = new PopupWithForm(elementsSelectors.popupAddPlace, handleSubmitPlace, api, 'postNewCard', urls.cardsUrl);
+    const popupWithFormPlace = new PopupWithForm(
+          elementsSelectors.popupAddPlace,
+          handleSubmitPlace,
+          api,
+          'postNewCard',
+          urls.cardsUrl);
 
     // Вешаем обработчик на кнопку открытия формы для добавления нового места
     buttonAddPlace.addEventListener('click', () => {

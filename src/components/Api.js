@@ -61,13 +61,14 @@ export default class Api {
     return this._makeRequest(fetch(`${url}${data._id}/likes`, {
       method: 'DELETE',
       headers: this._headers,
+      body: JSON.stringify({ likes: data })
     })
     );
   }
 
   checkLikeID(array, data) {
     const arrayLikes = array.likes;
-    return arrayLikes.find(element => element._id === data.id);
+    return arrayLikes.find(element => element._id === data._id);
   };
 }
 
