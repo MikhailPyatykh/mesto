@@ -24,19 +24,19 @@ export default class Card {
       this._likeStatus = likeStatus;
   }
 
-  // setLikeStatus() {
-  //   if (this._likeStatus) {
-  //     this._buttonLike.classList.add('place__likes_icon-heart_active');
-  //   }
-  //   else {
-  //     this._buttonLike.classList.remove('place__likes_icon-heart_active');
-  //   }
-  // }
+  setLikeStatus() {
+    if (this._likeStatus) {
+      this._buttonLike.classList.add('place__likes_icon-heart_active');
+    }
+    else {
+      this._buttonLike.classList.remove('place__likes_icon-heart_active');
+    }
+  }
 
   _setEventListeners() {
       this._buttonLike.addEventListener('click', evt => {
           evt.target.classList.toggle('place__likes_icon-heart_active');
-          // this._handleLikeClick(this._item, this._profileData, this._likesNumbers);
+          this._handleLikeClick(this._item, this._likesNumbers, this._buttonLike);
       });
 
       if (this._item.owner._id === this._profileData._id) {
@@ -59,7 +59,7 @@ export default class Card {
       this._likesNumbers.textContent = this._item.likes.length;
 
       this._setEventListeners();
-      // this.setLikeStatus();
+      this.setLikeStatus();
 
       return this._place;
   }

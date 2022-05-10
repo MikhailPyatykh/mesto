@@ -49,17 +49,14 @@ const handleCardClick = (name, link) => {
 
 
 // Callback функция обработки нажатия лайка
-const handleLikeClick = (dataID, profileID, likesButtonSelector) => {
-  // console.log(api.checkLikeID(dataID, profileID));
-  if (api.checkLikeID(dataID, profileID)) {
-    api.deleteLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      console.log(data.likes.length);
+const handleLikeClick = (dataID, likesButtonSelector, likeChecker) => {
+  if (likeChecker.classList.contains('place__likes_icon-heart_active')) {
+    api.putLike(urls.cardsIdUrlLikes, dataID).then(data => {
       likesButtonSelector.textContent = data.likes.length;
     })
   }
   else {
-    api.putLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      console.log(data.likes.length);
+    api.deleteLike(urls.cardsIdUrlLikes, dataID).then(data => {
       likesButtonSelector.textContent = data.likes.length;
     })
   }
