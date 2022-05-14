@@ -34,7 +34,7 @@ import UserInfo from '../components/UserInfo.js';
 
 // Добавление alt аватарке
 const photoDescription = () => {
-    avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
+    avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' Род занятий ' + occupationProfile.textContent;
 }
 
 photoDescription();
@@ -46,7 +46,6 @@ const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
 const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
-
 
 // Callback функция обработки нажатия лайка
 const handleLikeClick = (dataID, likesButtonSelector, likeChecker) => {

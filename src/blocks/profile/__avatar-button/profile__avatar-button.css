@@ -1,0 +1,21 @@
+.profile__avatar-button {
+  display: flex;
+  background: 26px 26px;
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  background-color: transparent;
+  outline: 2px solid green;
+  z-index: -1;
+  padding: 0;
+  margin: 0;
+}
+
+.profile__avatar-button:hover {
+  background-image: url(../../../images/icon-profile-pen.svg);
+  background-position: center;
+  cursor: pointer;
+  z-index: 1;
+  transition: opacity .6s ease-in-out;
+}
+
