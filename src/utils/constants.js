@@ -31,7 +31,7 @@ export const occupationProfileInput = document.querySelector('.popup__input_type
 export const nameProfile = document.querySelector('.profile__info-fio');
 export const occupationProfile = document.querySelector('.profile__info-occupation');
 
-export const avatarProfile = document.querySelector('.profile__avatar');
+export const avatarProfile = document.querySelector('.profile__avatar-image');
 
 export const buttonAddPlace = document.querySelector('.profile__add-button');
 

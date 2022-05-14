@@ -32,12 +32,7 @@ import PopupDeleteCard from '../components/PopupDeleteCard.js';
 
 import UserInfo from '../components/UserInfo.js';
 
-// Добавление alt аватарке
-const photoDescription = () => {
-    avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' Род занятий ' + occupationProfile.textContent;
-}
 
-photoDescription();
 
 // Используем класс PopupWithImage для открытия картинки карточки места
 const popupWithImage = new PopupWithImage(elementsSelectors.popupView);
@@ -109,6 +104,11 @@ api.getCards(urls.profileUrl).then(data => {
     occupationProfile.textContent = data.about;
     avatarProfile.src = data.avatar;
     const profileData = data;
+    // Добавление alt аватарке
+    const photoDescription = () => {
+    avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
+    }
+    photoDescription();
     return profileData;
 }).then((profileData) => api.getCards(urls.cardsUrl).then((cards) => {
     //Формируем карточки из массива
