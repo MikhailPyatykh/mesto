@@ -14,10 +14,11 @@ export const elementsSelectors = {
   popupEditProfile: '.popup_edit_profile',
   popupAddPlace: '.popup_add_place',
   popupDeleteCard: '.popup_delete-card',
+  popupPatchAvatar: '.popup_patch-avatar',
   placeID: '.place__id',
 }
 
-export const urls = {
+export const urlsSelectors = {
   profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me',
   cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards',
   cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
@@ -26,14 +27,19 @@ export const urls = {
 }
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
-export const nameProfileInput = document.querySelector('.popup__input_type_fio');
-export const occupationProfileInput = document.querySelector('.popup__input_type_occupation');
-export const nameProfile = document.querySelector('.profile__info-fio');
-export const occupationProfile = document.querySelector('.profile__info-occupation');
+export const buttonAddPlace = document.querySelector('.profile__add-button');
+export const buttonPatchAvatar = document.querySelector('.profile__avatar-button');
 
 export const avatarProfile = document.querySelector('.profile__avatar-image');
+export const nameProfile = document.querySelector('.profile__info-fio');
+export const nameProfileInput = document.querySelector('.popup__input_type_fio');
+export const occupationProfile = document.querySelector('.profile__info-occupation');
+export const occupationProfileInput = document.querySelector('.popup__input_type_occupation');
 
-export const buttonAddPlace = document.querySelector('.profile__add-button');
+
+
+
+
 
 export const placeNameInput = document.querySelector('.popup__input_type_place');
 export const placeLinkInput = document.querySelector('.popup__input_type_link');

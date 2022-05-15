@@ -3,8 +3,9 @@ import './index.css';
 import Api from '../components/Api.js';
 
 import {
-    urls,
+    urlsSelectors,
     cardTemplateSelector,
+    buttonPatchAvatar,
     buttonEditProfile,
     buttonAddPlace,
     formsValidationConfig,
@@ -44,16 +45,15 @@ const handleCardClick = (name, link) => {
 
 // Callback функция обработки нажатия лайка
 const handleLikeClick = (dataID, likesButtonSelector, likeChecker) => {
-  if (likeChecker.classList.contains('place__likes_icon-heart_active')) {
-    api.putLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      likesButtonSelector.textContent = data.likes.length;
-    })
-  }
-  else {
-    api.deleteLike(urls.cardsIdUrlLikes, dataID).then(data => {
-      likesButtonSelector.textContent = data.likes.length;
-    })
-  }
+    if (likeChecker.classList.contains('place__likes_icon-heart_active')) {
+        api.putLike(urlsSelectors.cardsIdUrlLikes, dataID).then(data => {
+            likesButtonSelector.textContent = data.likes.length;
+        })
+    } else {
+        api.deleteLike(urlsSelectors.cardsIdUrlLikes, dataID).then(data => {
+            likesButtonSelector.textContent = data.likes.length;
+        })
+    }
 }
 
 // Вешаем слушатели на картинку карточки места
@@ -61,14 +61,14 @@ popupWithImage.setEventListeners();
 
 //Callback функция инициализации класса Card и создания карточки
 const initCard = (
-        data,
-        selector,
-        callbackCardClick,
-        dataID,
-        callbackBusketClick,
-        callbackLikeClick,
-        callbackLikeStatus
-        ) => {
+    data,
+    selector,
+    callbackCardClick,
+    dataID,
+    callbackBusketClick,
+    callbackLikeClick,
+    callbackLikeStatus
+) => {
     const card = new Card(
         data,
         selector,
@@ -77,16 +77,18 @@ const initCard = (
         callbackBusketClick,
         callbackLikeClick,
         callbackLikeStatus
-        );
+    );
     const cardElement = card.createCard();
     return cardElement;
 }
 
 // Используем класс FormValidator для валидации форм
-const editFormValidator = new FormValidator(formsValidationConfig, editProfileInputs);
-const addCardFormValidator = new FormValidator(formsValidationConfig, newPlaceInputs);
+const editFormValidator = new FormValidator(formsValidationConfig, editProfileFormInputs);
+const addCardFormValidator = new FormValidator(formsValidationConfig, newPlaceFormInputs);
+const patchAvatarFormValidator = new FormValidator(formsValidationConfig, avatarFormInput);
 editFormValidator.enableValidation();
 addCardFormValidator.enableValidation();
+patchAvatarFormValidator.enableValidation();
 
 // Инициализируем класс Api
 const api = new Api({
@@ -98,7 +100,7 @@ const api = new Api({
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
-api.getCards(urls.profileUrl).then(data => {
+api.getCards(urlsSelectors.profileUrl).then(data => {
     // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
     nameProfile.textContent = data.name;
     occupationProfile.textContent = data.about;
@@ -106,24 +108,24 @@ api.getCards(urls.profileUrl).then(data => {
     const profileData = data;
     // Добавление alt аватарке
     const photoDescription = () => {
-    avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
+        avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
     }
     photoDescription();
     return profileData;
-}).then((profileData) => api.getCards(urls.cardsUrl).then((cards) => {
+}).then((profileData) => api.getCards(urlsSelectors.cardsUrl).then((cards) => {
     //Формируем карточки из массива
     const cardList = new Section({
         data: cards,
         renderer: (item) => {
             cardList.addItem(initCard(
-              item,
-              cardTemplateSelector,
-              handleCardClick,
-              profileData,
-              handleBasketClick,
-              handleLikeClick,
-              api.checkLikeID(item, profileData)
-              ), false);
+                item,
+                cardTemplateSelector,
+                handleCardClick,
+                profileData,
+                handleBasketClick,
+                handleLikeClick,
+                api.checkLikeID(item, profileData)
+            ), false);
         }
     }, elementsSelectors.placesList);
 
@@ -134,11 +136,11 @@ api.getCards(urls.profileUrl).then(data => {
 
     // Используем класс PopupWithForm для попапа профиля
     const popupWithFormProfile = new PopupWithForm(
-      elementsSelectors.popupEditProfile,
-      handleSubmitProfile,
-      api,
-      'patchProfileInfo',
-      urls.profileUrl);
+        elementsSelectors.popupEditProfile,
+        handleSubmitProfile,
+        api,
+        'patchProfileInfo',
+        urlsSelectors.profileUrl);
 
     // const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, data => api.patchData(urls.profileUrl, data).then(handleSubmitProfile));
 
@@ -155,11 +157,14 @@ api.getCards(urls.profileUrl).then(data => {
     popupWithFormProfile.setEventListeners();
 
     // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
-    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard, api, 'deleteCard', urls.cardsIdUrl)
+    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard,
+        api,
+        'deleteCard',
+        urlsSelectors.cardsIdUrl)
 
     // Callback функция для кнопки удаления карточки места
     const handleBasketClick = (id, card) => {
-      popupDeleteCard.openPopup(id, card);
+        popupDeleteCard.openPopup(id, card);
     }
 
     //  Вешаем обработчики на попап удаления карточки
@@ -168,23 +173,23 @@ api.getCards(urls.profileUrl).then(data => {
     // Callback функция добавления нового места пользователем на страницу
     const handleSubmitPlace = (data) => {
         cardList.addItem(initCard(
-          data,
-          cardTemplateSelector,
-          handleCardClick,
-          profileData,
-          handleBasketClick,
-          handleLikeClick,
-          api.checkLikeID(data, profileData)
-          ), true);
+            data,
+            cardTemplateSelector,
+            handleCardClick,
+            profileData,
+            handleBasketClick,
+            handleLikeClick,
+            api.checkLikeID(data, profileData)
+        ), true);
     }
 
     // Используем класс PopupWithForm для попапа нового места
     const popupWithFormPlace = new PopupWithForm(
-          elementsSelectors.popupAddPlace,
-          handleSubmitPlace,
-          api,
-          'postNewCard',
-          urls.cardsUrl);
+        elementsSelectors.popupAddPlace,
+        handleSubmitPlace,
+        api,
+        'postNewCard',
+        urlsSelectors.cardsUrl);
 
     // Вешаем обработчик на кнопку открытия формы для добавления нового места
     buttonAddPlace.addEventListener('click', () => {
@@ -194,6 +199,27 @@ api.getCards(urls.profileUrl).then(data => {
 
     //  Вешаем обработчики на попап профиля
     popupWithFormPlace.setEventListeners();
+
+    // Callback функция для изменения аватара профиля
+    const handleSubmitPatchAvatar = (data) => {
+        avatarProfile.src = data.avatar;
+    }
+
+    // Используем класс PopupWithForm для попапа изменения аватара
+    const popupPatchAvatar = new PopupWithForm(
+        elementsSelectors.popupPatchAvatar,
+        handleSubmitPatchAvatar,
+        api,
+        'patchAvatar',
+        urlsSelectors.avatarUrl);
+
+    buttonPatchAvatar.addEventListener('click', () => {
+        popupPatchAvatar.openPopup();
+        patchAvatarFormValidator.resetValidation();
+    })
+
+    //  Вешаем обработчики на попап изменения аватара
+    popupPatchAvatar.setEventListeners();
 
     //Вставляем карточки
     cardList.renderItems();

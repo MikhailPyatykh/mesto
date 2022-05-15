@@ -1,0 +1,4 @@
+.popup__padding_patch-avatar {
+  display: flex;
+  padding-top: 7px;
+}

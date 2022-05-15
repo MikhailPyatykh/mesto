@@ -36,7 +36,7 @@
         <button type="button" class="popup__close-btn"></button>
         <div class="popup__block">
           <h3 class="popup__heading">Редактировать профиль</h3>
-          <form class="popup__inputs" name="editProfileInputs" novalidate>
+          <form class="popup__inputs" name="editProfileFormInputs" novalidate>
             <input
               required
               name = "nameInput"
@@ -65,7 +65,7 @@
         <button type="button" class="popup__close-btn"></button>
         <div class="popup__block">
           <h3 class="popup__heading">Новое место</h3>
-          <form class="popup__inputs" name="newPlaceInputs" novalidate>
+          <form class="popup__inputs" name="newPlaceFormInputs" novalidate>
             <input
               required
               name = "newPlaceNameInput"
@@ -75,7 +75,7 @@
               placeholder="Название"
               class="popup__input popup__input_type_place"
             >
-            <span class="error" id = "newPlaceName-error" name="newPlaceNameInputError"></span>
+            <span class="error" id ="newPlaceName-error" name="newPlaceNameInputError"></span>
             <input
               required
               name = "newPlaceLinkInput"
@@ -84,7 +84,7 @@
               placeholder="Ссылка на картинку"
               class="popup__input popup__input_type_link"
             >
-            <span class="error" id = "newPlaceLink-error" name="newPlaceLinkInputError"></span>
+            <span class="error" id ="newPlaceLink-error" name="newPlaceLinkInputError"></span>
             <button type="submit" class="popup__submit-btn">Создать</button>
           </form>
         </div>
@@ -102,12 +102,32 @@
     <section class="popup popup_delete-card">
       <form class="popup__container">
         <button type="button" class="popup__close-btn"></button>
-          <div class="popup__block">
-            <h3 class="popup__heading">Вы уверены?</h3>
-            <div class= "popup__padding_delete-card"></div>
-            <button type="submit" class="popup__submit-btn">Да</button>
-          </div>
-        </form>
+        <div class="popup__block">
+          <h3 class="popup__heading">Вы уверены?</h3>
+          <div class= "popup__padding_delete-card"></div>
+          <button type="submit" class="popup__submit-btn">Да</button>
+        </div>
+      </form>
+    </section>
+    <section class="popup popup_patch-avatar">
+      <div class="popup__container">
+        <button type="button" class="popup__close-btn"></button>
+        <div class="popup__block">
+          <h3 class="popup__heading">Обновить аватар</h3>
+          <form class="popup__inputs" name="avatarFormInput" novalidate>
+            <div class= "popup__padding_patch-avatar"></div>
+            <input
+              required
+              name = "avatarLinkInput"
+              id = "avatarLink"
+              type="url"
+              class="popup__input popup__input_type_avatar-link"
+            >
+            <span class="error" id ="avatarLink-error" name="avatarLinkInputError"></span>
+            <button type="submit" class="popup__submit-btn">Создать</button>
+          </form>
+        </div>
+      </div>
     </section>
     <template id="place-template">
       <li class="place">

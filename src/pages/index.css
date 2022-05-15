@@ -43,4 +43,5 @@
 @import url(../blocks/popup/__submit-btn/_disabled/popup__submit-btn_disabled.css);
 @import url(../blocks/popup/__close-btn/popup__close-btn.css);
 @import url(../blocks/popup/__padding/_delete-card/popup__padding_delete-card.css);
+@import url(../blocks/popup/__padding/_patch-avatar/popup__padding_patch-avatar.css);
 @import url(../blocks/error/error.css);
