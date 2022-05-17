@@ -102,9 +102,8 @@
     <section class="popup popup_delete-card">
       <form class="popup__container">
         <button type="button" class="popup__close-btn"></button>
-        <div class="popup__block">
-          <h3 class="popup__heading">Вы уверены?</h3>
-          <div class= "popup__block_padding"></div>
+        <div class="popup__block ">
+          <h3 class="popup__heading popup__heading_padding">Вы уверены?</h3>
           <button type="submit" class="popup__submit-btn">Да</button>
         </div>
       </form>
@@ -114,8 +113,7 @@
         <button type="button" class="popup__close-btn"></button>
         <div class="popup__block">
           <h3 class="popup__heading">Обновить аватар</h3>
-          <form class="popup__inputs" name="avatarFormInput" novalidate>
-            <div class= "popup__inputs_padding"></div>
+          <form class="popup__inputs popup__inputs_padding" name="avatarFormInput" novalidate>
             <input
               required
               name = "avatarLinkInput"
@@ -124,7 +122,7 @@
               class="popup__input popup__input_type_avatar-link"
             >
             <span class="error" id ="avatarLink-error" name="avatarLinkInputError"></span>
-            <button type="submit" class="popup__submit-btn">Создать</button>
+            <button type="submit" class="popup__submit-btn">Сохранить</button>
           </form>
         </div>
       </div>
