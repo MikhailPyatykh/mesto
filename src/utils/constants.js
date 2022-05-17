@@ -37,10 +37,6 @@ export const occupationProfile = document.querySelector('.profile__info-occupati
 export const occupationProfileInput = document.querySelector('.popup__input_type_occupation');
 
 
-
-
-
-
 export const placeNameInput = document.querySelector('.popup__input_type_place');
 export const placeLinkInput = document.querySelector('.popup__input_type_link');
 
