@@ -100,6 +100,17 @@ const api = new Api({
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
+// Функция callback для обработки загрузки запроса
+const renderLoading = (isLoading, button, text) => {
+    if(isLoading) {
+      button.textContent = 'Сохранение...';
+    }
+    else {
+      button.textContent = text;
+    }
+
+  }
+
 api.getCards(urlsSelectors.profileUrl).then(data => {
     // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
     nameProfile.textContent = data.name;
@@ -140,7 +151,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitProfile,
         api,
         'patchProfileInfo',
-        urlsSelectors.profileUrl);
+        urlsSelectors.profileUrl,
+        renderLoading);
 
     // const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, data => api.patchData(urls.profileUrl, data).then(handleSubmitProfile));
 
@@ -189,7 +201,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitPlace,
         api,
         'postNewCard',
-        urlsSelectors.cardsUrl);
+        urlsSelectors.cardsUrl,
+        renderLoading);
 
     // Вешаем обработчик на кнопку открытия формы для добавления нового места
     buttonAddPlace.addEventListener('click', () => {
@@ -211,7 +224,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitPatchAvatar,
         api,
         'patchAvatar',
-        urlsSelectors.avatarUrl);
+        urlsSelectors.avatarUrl,
+        renderLoading);
 
     buttonPatchAvatar.addEventListener('click', () => {
         popupPatchAvatar.openPopup();
