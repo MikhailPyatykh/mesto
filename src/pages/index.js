@@ -108,7 +108,6 @@ const renderLoading = (isLoading, button, text) => {
     else {
       button.textContent = text;
     }
-
   }
 
 api.getCards(urlsSelectors.profileUrl).then(data => {
@@ -153,8 +152,6 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         'patchProfileInfo',
         urlsSelectors.profileUrl,
         renderLoading);
-
-    // const popupWithFormProfile = new PopupWithForm(elementsSelectors.popupEditProfile, data => api.patchData(urls.profileUrl, data).then(handleSubmitProfile));
 
     // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
     buttonEditProfile.addEventListener('click', () => {
