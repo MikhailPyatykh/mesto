@@ -235,3 +235,4 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
     //Вставляем карточки
     cardList.renderItems();
 }));
+// End
