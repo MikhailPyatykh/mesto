@@ -1,6 +1,6 @@
 export default class Api {
-  constructor(headers) {
-      this._headers = headers;
+  constructor(config) {
+      this._config = config;
   }
 
   _makeRequest(promise) {
@@ -8,25 +8,31 @@ export default class Api {
           if (res.ok) {
               return res.json();
           }
-          throw 'Ошибочка вышла'
-      }).then((obj) => {
+          throw 'Ошибка в запросе'
+      })
+      .then((obj) => {
           return obj;
-      }).catch((err) => {
-          console.error(err);
       })
   }
 
-  getCards(url) {
-      return this._makeRequest(fetch(url, {
+  getUserData() {
+    return this._makeRequest(fetch(`${this._config.baseUrl}/users/me`, {
+        method: 'GET',
+        headers: this._config.headers
+    }));
+}
+
+  getCards() {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/cards`, {
           method: 'GET',
-          headers: this._headers
+          headers: this._config.headers
       }));
   }
 
-  patchProfileInfo(url, data) {
-      return this._makeRequest(fetch(url, {
+  patchProfileInfo(data) {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/users/me`, {
           method: 'PATCH',
-          headers: this._headers,
+          headers: this._config.headers,
           body: JSON.stringify({
               name: data.nameInput,
               about: data.occupationInput
@@ -34,10 +40,10 @@ export default class Api {
       }));
   }
 
-  postNewCard(url, data) {
-      return this._makeRequest(fetch(url, {
+  postNewCard(data) {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/cards`, {
           method: 'POST',
-          headers: this._headers,
+          headers: this._config.headers,
           body: JSON.stringify({
               name: data.newPlaceNameInput,
               link: data.newPlaceLinkInput
@@ -45,24 +51,34 @@ export default class Api {
       }));
   }
 
-  deleteCard(url, data) {
-      return this._makeRequest(fetch(`${url}${data}`, {
+  deleteCard(data) {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/cards/${data}`, {
           method: 'DELETE',
-          headers: this._headers,
+          headers: this._config.headers,
       }));
   }
 
-  putLike(url, data) {
-      return this._makeRequest(fetch(`${url}${data._id}/likes`, {
+  patchAvatar(data) {
+    return this._makeRequest(fetch(`${this._config.baseUrl}/users/me/avatar`, {
+        method: 'PATCH',
+        headers: this._config.headers,
+        body: JSON.stringify({
+            avatar: data.avatarLinkInput
+        })
+    }));
+  }
+
+  putLike(data) {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/cards/${data._id}/likes`, {
           method: 'PUT',
-          headers: this._headers,
+          headers: this._config.headers,
       }));
   }
 
-  deleteLike(url, data) {
-      return this._makeRequest(fetch(`${url}${data._id}/likes`, {
+  deleteLike(data) {
+      return this._makeRequest(fetch(`${this._config.baseUrl}/cards/${data._id}/likes`, {
           method: 'DELETE',
-          headers: this._headers,
+          headers: this._config.headers,
           body: JSON.stringify({
               likes: data
           })
@@ -73,14 +89,4 @@ export default class Api {
       const arrayLikes = array.likes;
       return arrayLikes.find(element => element._id === data._id);
   };
-
-  patchAvatar(url, data) {
-      return this._makeRequest(fetch(url, {
-          method: 'PATCH',
-          headers: this._headers,
-          body: JSON.stringify({
-              avatar: data.avatarLinkInput
-          })
-      }));
-  }
 }

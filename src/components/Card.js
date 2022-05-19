@@ -35,8 +35,8 @@ export default class Card {
 
   _setEventListeners() {
       this._buttonLike.addEventListener('click', evt => {
-          evt.target.classList.toggle('place__likes_icon-heart_active');
-          this._handleLikeClick(this._item, this._likesNumbers, this._buttonLike);
+          // evt.target.classList.toggle('place__likes_icon-heart_active');
+          this._handleLikeClick(this._item, this._likesNumbers, this._buttonLike, evt);
       });
 
       if (this._item.owner._id === this._profileData._id) {

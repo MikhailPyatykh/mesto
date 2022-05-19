@@ -3,7 +3,6 @@ import './index.css';
 import Api from '../components/Api.js';
 
 import {
-    urlsSelectors,
     cardTemplateSelector,
     buttonPatchAvatar,
     buttonEditProfile,
@@ -14,7 +13,8 @@ import {
     nameProfile,
     occupationProfile,
     nameProfileInput,
-    occupationProfileInput
+    occupationProfileInput,
+    apiConfig
 } from '../utils/constants.js';
 
 import {
@@ -43,15 +43,29 @@ const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
 
+// Callback функция для переключения статуса лайка
+const likeToggle = (evt) => {
+  evt.target.classList.toggle('place__likes_icon-heart_active');
+}
+
 // Callback функция обработки нажатия лайка
-const handleLikeClick = (dataID, likesButtonSelector, likeChecker) => {
+const handleLikeClick = (dataID, likesButtonSelector, likeChecker, evt) => {
     if (likeChecker.classList.contains('place__likes_icon-heart_active')) {
-        api.putLike(urlsSelectors.cardsIdUrlLikes, dataID).then(data => {
+        api.deleteLike(dataID).then(data => {
             likesButtonSelector.textContent = data.likes.length;
         })
-    } else {
-        api.deleteLike(urlsSelectors.cardsIdUrlLikes, dataID).then(data => {
+        .then(() => likeToggle(evt))
+        .catch((err) => {
+          console.error(err);
+        })
+      }
+    else {
+        api.putLike(dataID).then(data => {
             likesButtonSelector.textContent = data.likes.length;
+        })
+        .then(() => likeToggle(evt))
+        .catch((err) => {
+          console.error(err);
         })
     }
 }
@@ -91,11 +105,7 @@ addCardFormValidator.enableValidation();
 patchAvatarFormValidator.enableValidation();
 
 // Инициализируем класс Api
-const api = new Api({
-    authorization: 'da546cc6-febd-4e48-90b5-e55f89894793',
-    'Accept': 'application/json',
-    'Content-type': 'application/json; charset=utf-8'
-});
+const api = new Api(apiConfig);
 
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
@@ -110,7 +120,7 @@ const renderLoading = (isLoading, button, text) => {
     }
   }
 
-api.getCards(urlsSelectors.profileUrl).then(data => {
+api.getUserData().then(data => {
     // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
     nameProfile.textContent = data.name;
     occupationProfile.textContent = data.about;
@@ -122,7 +132,7 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
     }
     photoDescription();
     return profileData;
-}).then((profileData) => api.getCards(urlsSelectors.cardsUrl).then((cards) => {
+}).then((profileData) => api.getCards().then((cards) => {
     //Формируем карточки из массива
     const cardList = new Section({
         data: cards,
@@ -150,8 +160,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitProfile,
         api,
         'patchProfileInfo',
-        urlsSelectors.profileUrl,
-        renderLoading);
+        renderLoading
+      );
 
     // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
     buttonEditProfile.addEventListener('click', () => {
@@ -166,10 +176,11 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
     popupWithFormProfile.setEventListeners();
 
     // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
-    const popupDeleteCard = new PopupDeleteCard(elementsSelectors.popupDeleteCard,
+    const popupDeleteCard = new PopupDeleteCard(
+        elementsSelectors.popupDeleteCard,
         api,
-        'deleteCard',
-        urlsSelectors.cardsIdUrl)
+        'deleteCard'
+    )
 
     // Callback функция для кнопки удаления карточки места
     const handleBasketClick = (id, card) => {
@@ -198,8 +209,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitPlace,
         api,
         'postNewCard',
-        urlsSelectors.cardsUrl,
-        renderLoading);
+        renderLoading
+    );
 
     // Вешаем обработчик на кнопку открытия формы для добавления нового места
     buttonAddPlace.addEventListener('click', () => {
@@ -221,8 +232,8 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
         handleSubmitPatchAvatar,
         api,
         'patchAvatar',
-        urlsSelectors.avatarUrl,
-        renderLoading);
+        renderLoading
+    );
 
     buttonPatchAvatar.addEventListener('click', () => {
         popupPatchAvatar.openPopup();
@@ -234,5 +245,7 @@ api.getCards(urlsSelectors.profileUrl).then(data => {
 
     //Вставляем карточки
     cardList.renderItems();
-}));
-// End
+}))
+.catch((err) => {
+  console.error(err);
+})

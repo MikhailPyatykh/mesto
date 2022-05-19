@@ -1,9 +1,9 @@
 export const formsValidationConfig = {
-formSelector: '.popup__inputs',
-inputSelector: '.popup__input',
-inputErrorClass: 'popup__input_type_error',
-submitButtonSelector: '.popup__submit-btn',
-inactiveButtonClass: 'popup__submit-btn_disabled',
+  formSelector: '.popup__inputs',
+  inputSelector: '.popup__input',
+  inputErrorClass: 'popup__input_type_error',
+  submitButtonSelector: '.popup__submit-btn',
+  inactiveButtonClass: 'popup__submit-btn_disabled',
 }
 
 export const elementsSelectors = {
@@ -18,12 +18,13 @@ export const elementsSelectors = {
   placeID: '.place__id',
 }
 
-export const urlsSelectors = {
-  profileUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me',
-  cardsUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards',
-  cardsIdUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
-  cardsIdUrlLikes: 'https://mesto.nomoreparties.co/v1/cohort-38/cards/',
-  avatarUrl: 'https://mesto.nomoreparties.co/v1/cohort-38/users/me/avatar'
+export const apiConfig = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-38',
+  headers: {
+    authorization: 'da546cc6-febd-4e48-90b5-e55f89894793',
+    'Accept': 'application/json',
+    'Content-type': 'application/json; charset=utf-8'
+  }
 }
 
 export const buttonEditProfile = document.querySelector('.profile__edit-button');
