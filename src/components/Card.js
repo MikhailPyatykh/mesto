@@ -5,8 +5,9 @@ export default class Card {
         handleCardClick,
         profileData,
         handleBasketClick,
-        handleLikeClick,
-        likeStatus
+        likeStatus,
+        putLike,
+        removeLike
         ) {
       this._item = item
       this._template = document.querySelector(cardTemplateSelector).content.querySelector('.place');
@@ -20,8 +21,21 @@ export default class Card {
       this._profileData = profileData;
       this._handleCardClick = handleCardClick;
       this._handleBasketClick = handleBasketClick;
-      this._handleLikeClick = handleLikeClick;
       this._likeStatus = likeStatus;
+      this._putLike = putLike;
+      this._removeLike = removeLike;
+  }
+
+  likeToggle(evt) {
+    evt.target.classList.toggle('place__likes_icon-heart_active');
+  }
+
+  getId() {
+    return this._item;
+  }
+
+  updateLikes(data) {
+    this._likesNumbers.textContent = data.likes.length;
   }
 
   setLikeStatus() {
@@ -35,8 +49,12 @@ export default class Card {
 
   _setEventListeners() {
       this._buttonLike.addEventListener('click', evt => {
-          // evt.target.classList.toggle('place__likes_icon-heart_active');
-          this._handleLikeClick(this._item, this._likesNumbers, this._buttonLike, evt);
+          if (this._buttonLike.classList.contains('place__likes_icon-heart_active')) {
+            this._removeLike(this, evt);
+          }
+          else {
+            this._putLike(this, evt);
+          }
       });
 
       if (this._item.owner._id === this._profileData._id) {

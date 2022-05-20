@@ -75,7 +75,7 @@ export default class Api {
       }));
   }
 
-  deleteLike(data) {
+  removeLike(data) {
       return this._makeRequest(fetch(`${this._config.baseUrl}/cards/${data._id}/likes`, {
           method: 'DELETE',
           headers: this._config.headers,

@@ -43,31 +43,28 @@ const handleCardClick = (name, link) => {
     popupWithImage.openPopup(name, link);
 }
 
-// Callback функция для переключения статуса лайка
-const likeToggle = (evt) => {
-  evt.target.classList.toggle('place__likes_icon-heart_active');
+// Callback функция постановки лайка
+const putLike = (card, evt) => {
+  api.putLike(card.getId())
+      .then((res) => {
+          card.updateLikes(res)
+      })
+      .then(() => card.likeToggle(evt))
+      .catch((err) => {
+          console.log(err);
+      });
 }
 
-// Callback функция обработки нажатия лайка
-const handleLikeClick = (dataID, likesButtonSelector, likeChecker, evt) => {
-    if (likeChecker.classList.contains('place__likes_icon-heart_active')) {
-        api.deleteLike(dataID).then(data => {
-            likesButtonSelector.textContent = data.likes.length;
-        })
-        .then(() => likeToggle(evt))
-        .catch((err) => {
-          console.error(err);
-        })
-      }
-    else {
-        api.putLike(dataID).then(data => {
-            likesButtonSelector.textContent = data.likes.length;
-        })
-        .then(() => likeToggle(evt))
-        .catch((err) => {
-          console.error(err);
-        })
-    }
+// Callback функция снятия лайка
+const removeLike = (card, evt) => {
+  api.removeLike(card.getId())
+      .then((res) => {
+          card.updateLikes(res)
+      })
+      .then(() => card.likeToggle(evt))
+      .catch((err) => {
+          console.log(err);
+      });
 }
 
 // Вешаем слушатели на картинку карточки места
@@ -80,8 +77,9 @@ const initCard = (
     callbackCardClick,
     dataID,
     callbackBusketClick,
-    callbackLikeClick,
-    callbackLikeStatus
+    callbackLikeStatus,
+    callbackPutLike,
+    callbackRemoveLike
 ) => {
     const card = new Card(
         data,
@@ -89,8 +87,9 @@ const initCard = (
         callbackCardClick,
         dataID,
         callbackBusketClick,
-        callbackLikeClick,
-        callbackLikeStatus
+        callbackLikeStatus,
+        callbackPutLike,
+        callbackRemoveLike
     );
     const cardElement = card.createCard();
     return cardElement;
@@ -109,16 +108,6 @@ const api = new Api(apiConfig);
 
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
-
-// Функция callback для обработки загрузки запроса
-const renderLoading = (isLoading, button, text) => {
-    if(isLoading) {
-      button.textContent = 'Сохранение...';
-    }
-    else {
-      button.textContent = text;
-    }
-  }
 
 api.getUserData().then(data => {
     // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
@@ -143,25 +132,32 @@ api.getUserData().then(data => {
                 handleCardClick,
                 profileData,
                 handleBasketClick,
-                handleLikeClick,
-                api.checkLikeID(item, profileData)
+                api.checkLikeID(item, profileData),
+                putLike,
+                removeLike
             ), false);
         }
     }, elementsSelectors.placesList);
 
     // Callback функция для ввода новой информации на страницу
-    const handleSubmitProfile = (data) => {
+    const handleSubmitProfile = (popup, inputValues) => {
+        popup.renderLoading(true);
+        api.patchProfileInfo(inputValues)
+        .then((data) => {
         userInfo.setUserInfo(data);
+        })
+        .then(() => popup.closePopup())
+        .finally(() => popup.renderLoading(false))
+        .catch((err) => {
+          console.error(err);
+        })
     }
 
     // Используем класс PopupWithForm для попапа профиля
     const popupWithFormProfile = new PopupWithForm(
         elementsSelectors.popupEditProfile,
-        handleSubmitProfile,
-        api,
-        'patchProfileInfo',
-        renderLoading
-      );
+        handleSubmitProfile
+     );
 
     // Вешаем обработчик на кнопку открытия профиля пользователя, через класс UserInfo задаем инпутам текст со страницы
     buttonEditProfile.addEventListener('click', () => {
@@ -170,16 +166,26 @@ api.getUserData().then(data => {
         occupationProfileInput.value = userData.info;
         popupWithFormProfile.openPopup();
         editFormValidator.resetValidation();
-    })
+    });
 
     // Вешаем обработчики на попап профиля
     popupWithFormProfile.setEventListeners();
 
+
+    // Callback функция обработки удаления карточки пользователя
+    const handleDeleteCard = (popup) => {
+      api.deleteCard(popup.id)
+      .then(() => popup.card.remove())
+      .then(() => popup.closePopup())
+      .catch((err) => {
+        console.error(err);
+      })
+    };
+
     // Используем класс PopupDeleteCard для удаления карточки места, созданного пользователем
     const popupDeleteCard = new PopupDeleteCard(
         elementsSelectors.popupDeleteCard,
-        api,
-        'deleteCard'
+        handleDeleteCard
     )
 
     // Callback функция для кнопки удаления карточки места
@@ -191,25 +197,32 @@ api.getUserData().then(data => {
     popupDeleteCard.setEventListeners();
 
     // Callback функция добавления нового места пользователем на страницу
-    const handleSubmitPlace = (data) => {
+    const handleSubmitPlace = (popup, inputValues) => {
+      popup.renderLoading(true);
+      api.postNewCard(inputValues)
+      .then(data => {
         cardList.addItem(initCard(
             data,
             cardTemplateSelector,
             handleCardClick,
             profileData,
             handleBasketClick,
-            handleLikeClick,
-            api.checkLikeID(data, profileData)
+            api.checkLikeID(data, profileData),
+            putLike,
+            removeLike
         ), true);
+      })
+      .then(() => popup.closePopup())
+      .finally(() => popup.renderLoading(false))
+      .catch((err) => {
+        console.error(err);
+      })
     }
 
     // Используем класс PopupWithForm для попапа нового места
     const popupWithFormPlace = new PopupWithForm(
         elementsSelectors.popupAddPlace,
         handleSubmitPlace,
-        api,
-        'postNewCard',
-        renderLoading
     );
 
     // Вешаем обработчик на кнопку открытия формы для добавления нового места
@@ -222,17 +235,22 @@ api.getUserData().then(data => {
     popupWithFormPlace.setEventListeners();
 
     // Callback функция для изменения аватара профиля
-    const handleSubmitPatchAvatar = (data) => {
-        avatarProfile.src = data.avatar;
+    const handleSubmitPatchAvatar = (popup, inputValues) => {
+        popup.renderLoading(true);
+        api.patchAvatar(inputValues)
+        .then((data) => {
+          avatarProfile.src = data.avatar;
+        })
+        .then(() => popup.closePopup())
+        .finally(() => popup.renderLoading(false))
+        .catch((err) => {
+          console.error(err)});
     }
 
     // Используем класс PopupWithForm для попапа изменения аватара
     const popupPatchAvatar = new PopupWithForm(
         elementsSelectors.popupPatchAvatar,
-        handleSubmitPatchAvatar,
-        api,
-        'patchAvatar',
-        renderLoading
+        handleSubmitPatchAvatar
     );
 
     buttonPatchAvatar.addEventListener('click', () => {
