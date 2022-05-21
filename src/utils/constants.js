@@ -16,6 +16,7 @@ export const elementsSelectors = {
   popupDeleteCard: '.popup_delete-card',
   popupPatchAvatar: '.popup_patch-avatar',
   placeID: '.place__id',
+  avatarProfile: '.profile__avatar-image',
 }
 
 export const apiConfig = {

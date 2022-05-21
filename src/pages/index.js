@@ -10,8 +10,6 @@ import {
     formsValidationConfig,
     avatarProfile,
     elementsSelectors,
-    nameProfile,
-    occupationProfile,
     nameProfileInput,
     occupationProfileInput,
     apiConfig
@@ -109,19 +107,13 @@ const api = new Api(apiConfig);
 // Используем класс UserInfo для отображения и изменения информации в профиле пользователя
 const userInfo = new UserInfo(elementsSelectors);
 
-api.getUserData().then(data => {
-    // Заполняем информацию профиля с сервера и возвращаем объект с данными пользователя
-    nameProfile.textContent = data.name;
-    occupationProfile.textContent = data.about;
-    avatarProfile.src = data.avatar;
-    const profileData = data;
-    // Добавление alt аватарке
-    const photoDescription = () => {
-        avatarProfile.alt = 'Фото ' + nameProfile.textContent + ' ' + 'Род занятий ' + occupationProfile.textContent;
-    }
-    photoDescription();
-    return profileData;
-}).then((profileData) => api.getCards().then((cards) => {
+Promise.all([api.getUserData(), api.getCards()])
+.then(([profileData, cards]) => {
+
+    // Заполняем информацию профиля с сервера, добавляем нужную информацию профиля элементам
+    // и возвращаем объект с данными пользователя
+    userInfo.setUserInfo(profileData);
+
     //Формируем карточки из массива
     const cardList = new Section({
         data: cards,
@@ -263,7 +255,7 @@ api.getUserData().then(data => {
 
     //Вставляем карточки
     cardList.renderItems();
-}))
+})
 .catch((err) => {
   console.error(err);
 })
