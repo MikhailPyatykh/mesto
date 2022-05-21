@@ -231,7 +231,7 @@ Promise.all([api.getUserData(), api.getCards()])
         popup.renderLoading(true);
         api.patchAvatar(inputValues)
         .then((data) => {
-          avatarProfile.src = data.avatar;
+          userInfo.setUserInfo(data);
         })
         .then(() => popup.closePopup())
         .finally(() => popup.renderLoading(false))

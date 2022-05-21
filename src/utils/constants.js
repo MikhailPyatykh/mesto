@@ -32,8 +32,8 @@ export const buttonEditProfile = document.querySelector('.profile__edit-button')
 export const buttonAddPlace = document.querySelector('.profile__add-button');
 export const buttonPatchAvatar = document.querySelector('.profile__avatar-button');
 
-export const avatarProfile = document.querySelector('.profile__avatar-image');
-export const nameProfile = document.querySelector('.profile__info-fio');
+// export const avatarProfile = document.querySelector('.profile__avatar-image');
+// export const nameProfile = document.querySelector('.profile__info-fio');
 export const nameProfileInput = document.querySelector('.popup__input_type_fio');
 export const occupationProfile = document.querySelector('.profile__info-occupation');
 export const occupationProfileInput = document.querySelector('.popup__input_type_occupation');
