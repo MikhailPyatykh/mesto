@@ -8,7 +8,6 @@ import {
     buttonEditProfile,
     buttonAddPlace,
     formsValidationConfig,
-    avatarProfile,
     elementsSelectors,
     nameProfileInput,
     occupationProfileInput,
